@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Database VOC Grezzo, Funnel Templates v1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { font-family: 'Montserrat', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0c0c0c; color: #e8e8e8; line-height: 1.7; }
+a { color: #f0b41a; text-decoration: none; }
+
+.bc-header { background: #111; border-bottom: 3px solid #f0b41a; padding: 28px 40px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+.bc-header-left { flex: 1; min-width: 300px; }
+.bc-logo { color: #f0b41a; font-weight: 800; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+.bc-skill-name { color: #f5f5f5; font-weight: 700; font-size: 1.5rem; display: block; margin-bottom: 8px; }
+.bc-desc { color: #aaa; font-size: 0.92rem; line-height: 1.5; max-width: 600px; }
+.bc-header-right { text-align: right; font-size: 0.78rem; }
+.meta-row { margin-bottom: 4px; line-height: 1.5; }
+.meta-label { color: #888; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.meta-label::after { content: ":"; }
+.meta-value { color: #ddd; font-size: 11px; margin-left: 4px; }
+.version-badge { background: #f0b41a; color: #000; padding: 3px 8px; border-radius: 3px; font-weight: 700; font-size: 0.7rem; letter-spacing: 1px; display: inline-block; margin-bottom: 6px; }
+
+.sticky-nav { background: #181818; padding: 14px 40px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #2a2a2a; overflow-x: auto; white-space: nowrap; }
+.sticky-nav a { color: #aaa; margin-right: 22px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: color 0.2s; }
+.sticky-nav a:hover { color: #f0b41a; }
+
+.content { max-width: 1180px; margin: 0 auto; padding: 50px 40px; }
+h2 { color: #f0b41a; font-size: 1.8rem; font-weight: 800; margin: 50px 0 20px; }
+h3 { color: #fff; font-size: 1.3rem; font-weight: 700; margin: 30px 0 14px; }
+h4 { color: #f0b41a; font-size: 1.05rem; font-weight: 700; margin: 22px 0 10px; }
+p { margin-bottom: 14px; color: #d8d8d8; }
+
+.section-header { background: #f0b41a; color: #000; padding: 14px 22px; font-weight: 800; font-size: 1.05rem; border-radius: 4px; display: inline-block; margin-top: 60px; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 1px; }
+.intro-box { background: #161616; border-left: 4px solid #f0b41a; padding: 22px 26px; margin-bottom: 32px; border-radius: 4px; }
+
+.voc-item { background: #161616; border-left: 4px solid #f0b41a; padding: 18px 22px; margin-bottom: 14px; border-radius: 4px; }
+.voc-text { color: #e8e8e8; font-style: italic; font-size: 0.95rem; margin-bottom: 10px; }
+.voc-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.78rem; color: #888; }
+.voc-tag { background: #1a1a1a; color: #f0b41a; padding: 2px 10px; border-radius: 12px; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.voc-source { color: #888; }
+
+.category-block { margin-bottom: 50px; }
+.category-title { color: #fff; font-size: 1.4rem; font-weight: 700; padding-bottom: 10px; border-bottom: 2px solid #f0b41a; margin-bottom: 22px; }
+.category-count { color: #f0b41a; font-size: 0.85rem; font-weight: 600; margin-left: 12px; }
+
+.stat-row { display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0 30px; }
+.stat-box { background: #161616; padding: 16px 22px; border-radius: 4px; border-left: 3px solid #f0b41a; flex: 1; min-width: 180px; }
+.stat-num { color: #f0b41a; font-size: 1.8rem; font-weight: 800; }
+.stat-lbl { color: #aaa; font-size: 0.78rem; margin-top: 4px; }
+
+.bc-footer { background: #111; border-top: 3px solid #f0b41a; padding: 32px 40px; margin-top: 60px; text-align: center; }
+.bc-footer p { color: #aaa; font-size: 0.85rem; margin: 4px 0; }
+.bc-footer strong { color: #f0b41a; }
+
+#scrollTop { position: fixed; bottom: 30px; right: 30px; background: #f0b41a; color: #000; width: 46px; height: 46px; border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; font-weight: 800; font-size: 1.2rem; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+#scrollTop.show { display: flex; }
+
+@media (max-width: 768px) {
+  .bc-header { padding: 20px 22px; }
+  .content { padding: 30px 22px; }
+}
+</style>
+</head>
+<body>
+
+<header class="bc-header">
+  <div class="bc-header-left">
+    <span class="bc-logo">BENTIVOGLIO CONSULTING</span>
+    <span class="bc-skill-name">Database VOC Grezzo, Funnel Templates</span>
+    <p class="bc-desc">Raccolta organizzata di tutte le citazioni Voice of Customer raccolte durante la ricerca. Ogni voce con testo originale, fonte, categoria tematica. Materiale grezzo pronto per essere usato in headline, email, ads, messaggi outbound.</p>
+  </div>
+  <div class="bc-header-right">
+    <span class="version-badge">v1.0</span>
+    <div class="meta-row"><span class="meta-label">Documento</span><span class="meta-value">Database VOC grezzo</span></div>
+    <div class="meta-row"><span class="meta-label">Data creazione</span><span class="meta-value">17/05/2026, 09:34</span></div>
+    <div class="meta-row"><span class="meta-label">Voci raccolte</span><span class="meta-value">100+ citazioni</span></div>
+    <div class="meta-row"><span class="meta-label">Companion</span><span class="meta-value">analisi-voc-multi-target-funnel-templates-v1.0.html</span></div>
+  </div>
+</header>
+
+<nav class="sticky-nav">
+  <a onclick="scrollToSection('top')">Top</a>
+  <a onclick="scrollToSection('stats')">Statistiche</a>
+  <a onclick="scrollToSection('cat-agenzie')">Delusione agenzie</a>
+  <a onclick="scrollToSection('cat-sito')">Sito che non funziona</a>
+  <a onclick="scrollToSection('cat-wp')">WordPress problemi</a>
+  <a onclick="scrollToSection('cat-architetti')">Architetti</a>
+  <a onclick="scrollToSection('cat-medici')">Medici</a>
+  <a onclick="scrollToSection('cat-pmi')">PMI B2B</a>
+  <a onclick="scrollToSection('cat-consulenti')">Consulenti</a>
+  <a onclick="scrollToSection('cat-systeme')">Systeme.io</a>
+  <a onclick="scrollToSection('cat-costi')">Costi marketing</a>
+  <a onclick="scrollToSection('frasi-killer')">Frasi killer per copy</a>
+</nav>
+
+<div class="content" id="top">
+
+<div class="section-header" id="stats">Statistiche raccolta</div>
+<div class="stat-row">
+  <div class="stat-box"><div class="stat-num">100+</div><div class="stat-lbl">Voci VOC raccolte</div></div>
+  <div class="stat-box"><div class="stat-num">90+</div><div class="stat-lbl">Fonti consultate</div></div>
+  <div class="stat-box"><div class="stat-num">10</div><div class="stat-lbl">Categorie tematiche</div></div>
+  <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Target coperti</div></div>
+</div>
+
+<div class="intro-box">
+  <p style="margin: 0;"><strong style="color: #f0b41a;">Come usare questo database.</strong> Ogni voce e una "miniera" da cui pescare frasi vere del target. Quando devi scrivere una headline, un'email outbound, un annuncio, un post social, vieni qui e cerca la frase giusta. Le parole esatte del cliente sono sempre piu forti delle parole inventate da noi.</p>
+</div>
+
+<!-- CAT 1, DELUSIONE AGENZIE -->
+<div class="section-header" id="cat-agenzie">1, Delusione e frustrazione verso le agenzie</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Aziende che rifanno il sito, investono nei social, provano campagne, cambiano agenzia, e dopo mesi si ritrovano con pochi risultati, poca chiarezza e molta frustrazione. La parte piu pericolosa e che iniziano a pensare che il marketing non funzioni."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Roma Comunica Web, aprile 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Le PMI sbagliano con le agenzie web quando scelgono in base al prezzo, alla grafica o alle promesse veloci. Per evitare errori e fondamentale valutare strategia, metodo e capacita reale di generare clienti, non solo i servizi offerti."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Roma Comunica Web</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Una buona agenzia non vende solo servizi, costruisce una direzione. Quello che conta davvero e la capacita di generare contatti, richieste e clienti attraverso un sistema coerente. Senza metodo si fanno attivita, con il metodo si costruisce un sistema."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Roma Comunica Web</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"L'account senior vende il contratto, il junior lo gestisce. Il profilo con 10 anni di esperienza che presenta il preventivo ha 15 clienti attivi e dedica al vostro account 2 ore al mese. Il resto del lavoro lo fa un collaboratore di 24 anni che ha iniziato sei mesi fa. Non e necessariamente sbagliato, ma deve essere dichiarato, e non scoperto dopo tre mesi di risultati deludenti."</p>
+  <div class="voc-meta"><span class="voc-tag">Analisi settore</span><span class="voc-source">Bliss Agency, 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il marketing senza misurazione e solo una scommessa d'azzardo. Molti pensano che il marketing stia funzionando perche vedono numeri. Il problema e che stanno guardando quelli sbagliati."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Roma Comunica Web</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Pasquale ed i ragazzi top! Agenzia che sa il fatto suo e che ascolta finalmente le esigenze del cliente senza perdite di tempo o richieste continue di denaro."</p>
+  <div class="voc-meta"><span class="voc-tag">Recensione cliente positiva</span><span class="voc-source">Trustpilot, Consulenza24h</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Continuamente alla ricerca dell'agenzia giusta, siamo stati presi di mira dalla loro sponsorizzata, inizialmente sembrava uguale alle altre."</p>
+  <div class="voc-meta"><span class="voc-tag">Recensione cliente</span><span class="voc-source">Trustpilot, Consulenza24h</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il marketing per la mia attivita era stato un disastro. Quando si sono presentati non credevo piu di tanto alle promesse, ma oggi a distanza di mesi posso affermare con soddisfazione che nessuna agenzia e riuscita a farmi ottenere risultati."</p>
+  <div class="voc-meta"><span class="voc-tag">Recensione cliente</span><span class="voc-source">Trustpilot, Consulenza24h</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il mercato delle web agency e dei freelance e vasto e poco regolamentato. Accanto a professionisti seri esistono improvvisati che promettono risultati miracolosi a prezzi stracciati. Il risultato, troppo spesso, e un sito scadente, nessun supporto post-lancio e soldi buttati."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Targatocn, marzo 2026</span></div>
+</div>
+
+<!-- CAT 2, SITO CHE NON FUNZIONA -->
+<div class="section-header" id="cat-sito">2, Sito che non porta clienti</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il sito fatto dal cugino che sa usare il computer, la pagina creata con un builder gratuito in un pomeriggio, il logo disegnato con un programma qualsiasi. Il risultato e quasi sempre lo stesso, un'immagine poco professionale che allontana i clienti invece di attrarli."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Targatocn, marzo 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Un sito web e il biglietto da visita digitale dell'azienda. Un visitatore impiega meno di 3 secondi per decidere se restare o andarsene."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Targatocn, marzo 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Se il tuo sito non porta clienti, potresti essere nelle mani sbagliate. Se la tua web agency ha completato il lavoro senza darti indicazioni su come gestire contenuti, SEO e marketing dopo il lancio, allora ti ha lasciato con un sito destinato a invecchiare rapidamente."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Alberto Pozzi, febbraio 2025</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Paghi ogni mese per un servizio di gestione o marketing, ma non sai cosa stanno facendo? Un'agenzia trasparente ti invia report dettagliati su traffico, lead e ottimizzazioni SEO effettuate. Se non ricevi nulla, probabilmente non stanno lavorando sul tuo sito."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Alberto Pozzi, febbraio 2025</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Sarebbe come gestire un'azienda senza avere il bilancio. Tu dovresti avere accesso diretto a Google Analytics e Google Search Console per vedere direttamente le statistiche di traffico del sito."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Alberto Pozzi</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Oggi oltre il 70% del traffico web arriva da smartphone. Se le pagine del sito impiegano piu di 3 secondi per caricarsi, perderai la maggior parte dei visitatori. Google penalizza i siti lenti o difficili da navigare."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Alberto Pozzi</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Se vuoi capire se il tuo sito (o il progetto che hai in mente) e nella direzione giusta, il primo passo e sempre lo stesso. Un sito web non e un oggetto, non e una brochure, non e un biglietto da visita digitale."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Web Style Studio</span></div>
+</div>
+
+<!-- CAT 3, WORDPRESS PROBLEMI -->
+<div class="section-header" id="cat-wp">3, WordPress, manutenzione e costi nascosti</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il sito rallenta dopo ogni aggiornamento. Un plugin rompe qualcosa che funzionava. La manutenzione mensile costa piu di quanto preventivato. E ogni volta che sembra risolto, il problema torna, magari con una faccia diversa. Non e sfortuna, e architettura."</p>
+  <div class="voc-meta"><span class="voc-tag">Analisi tecnica</span><span class="voc-source">Keidea CMS, maggio 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"WordPress e gratuito. E la parte che viene comunicata. Quello che non viene comunicato e il costo reale dello stack professionale su 3 anni."</p>
+  <div class="voc-meta"><span class="voc-tag">Analisi tecnica</span><span class="voc-source">Keidea CMS, maggio 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Hosting dedicato per prestazioni accettabili, 50-200 euro al mese, quindi 1.800-7.200 euro su 3 anni. Plugin premium per SEO, sicurezza, form, e-commerce, backup, 300-800 euro all'anno, quindi 900-2.400 euro su 3 anni. Manutenzione mensile, aggiornamenti, test, risoluzione conflitti, se affidata a un'agenzia, 100-300 euro al mese, quindi 3.600-10.800 euro su 3 anni."</p>
+  <div class="voc-meta"><span class="voc-tag">Costi reali WP</span><span class="voc-source">Keidea CMS</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"WordPress ha limitazioni strutturali, carica tutti i plugin per ogni richiesta, genera molte query per ogni pagina, accumula dati nel database nel tempo. Queste limitazioni si possono mitigare con ottimizzazioni, ma non eliminare."</p>
+  <div class="voc-meta"><span class="voc-tag">Analisi tecnica</span><span class="voc-source">Keidea CMS</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Quando le ottimizzazioni diventano piu costose dei benefici che producono. I segnali concreti, hai gia ottimizzato hosting, PHP e database e il TTFB rimane sopra 400ms, i costi di manutenzione annuali superano quelli di realizzazione, ogni aggiornamento rompe qualcosa."</p>
+  <div class="voc-meta"><span class="voc-tag">Analisi tecnica</span><span class="voc-source">Keidea CMS</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Se un sito WordPress rallenta improvvisamente una volta, puo succedere ancora. La differenza la fa la manutenzione. Non parlo di aggiornare due plugin ogni tanto, ma di un controllo costante su prestazioni, sicurezza, errori e compatibilita."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo tecnico</span><span class="voc-source">Riccardo Web Design</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Se il sito e ospitato su un piano condiviso economico, puo bastare che altri siti sullo stesso server consumino risorse per farti vedere tempi di risposta molto piu alti."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo tecnico</span><span class="voc-source">Riccardo Web Design</span></div>
+</div>
+
+<!-- CAT 4, ARCHITETTI -->
+<div class="section-header" id="cat-architetti">4, Architetti e ingegneri</div>
+
+<div class="voc-item">
+  <p class="voc-text">"La maggior parte degli architetti e degli studi di architettura e ancora dotato di un semplice sito web vetrina e profili social che, solitamente, generano ben pochi contatti."</p>
+  <div class="voc-meta"><span class="voc-tag">Settore architetti</span><span class="voc-source">Marketing Focalizzato, maggio 2025</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il 99% dei siti di architetti e totalmente inutile perche minimalista, con immagini pesanti in alta risoluzione e soprattutto non ottimizzato per i motori di ricerca."</p>
+  <div class="voc-meta"><span class="voc-tag">Settore architetti</span><span class="voc-source">Giacomo Cellini, settembre 2024</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Se hai un sito minimalista, senza blog, senza alcuna spiegazione chiara dei tuoi servizi, con grandi immagini pesanti e non mobile responsive, molto probabilmente non ti ha mai contattato nessun cliente. Mi sbaglio?"</p>
+  <div class="voc-meta"><span class="voc-tag">Settore architetti</span><span class="voc-source">Giacomo Cellini</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Solo il 25% delle pagine web degli studi d'architettura presenti in Italia e stata correttamente impostata per essere indicizzata dai motori di ricerca. Circa il 75% delle pagine web riferibili agli studi d'architettura presentano un'indicizzazione web inesistente o addirittura errata."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato settore</span><span class="voc-source">Unione Architetti</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Cresce esponenzialmente il numero di persone che fanno scelte e prendono decisioni effettuando ricerche online sui motori di ricerca e sulle piattaforme di intelligenza artificiale e, purtroppo, sotto questo punto di vista, la maggior parte degli architetti e degli studi di architettura genera ben pochi contatti."</p>
+  <div class="voc-meta"><span class="voc-tag">Settore architetti</span><span class="voc-source">Marketing Focalizzato</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il mercato disponibile si ridimensiona in assenza di incentivi e non e totalmente appannaggio dei soli architetti perche vi sono altre figure professionali con competenze simili, societa di ingegneria, ingegneri edili, geometri, che operano nello stesso mercato."</p>
+  <div class="voc-meta"><span class="voc-tag">Settore architetti</span><span class="voc-source">Marketing Focalizzato</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il web marketing non funziona, ho speso solo tempo e denaro inutilmente, non ho ricevuto dal mio sito web e dai social nemmeno un contatto. Ho provato di tutto e fatto tutto il possibile ma non ho ottenuto risultati."</p>
+  <div class="voc-meta"><span class="voc-tag">Citazione cliente</span><span class="voc-source">Marketing Focalizzato, voce reale</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Devi anzitutto capire che la prima attivita su cui devi concentrarti e costruire una strategia di marketing efficace sapendo che, per riuscirci, non dovrai mai copiare quello che hanno gia fatto altri architetti."</p>
+  <div class="voc-meta"><span class="voc-tag">Settore architetti</span><span class="voc-source">Marketing Focalizzato</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Quando i visitatori devono pensare a cosa fare sul tuo sito Web, o perche dovrebbero anche essere li, in primo luogo, se ne andranno."</p>
+  <div class="voc-meta"><span class="voc-tag">Citazione esperto UX</span><span class="voc-source">Steve Krug, citato da Unione Architetti</span></div>
+</div>
+
+<!-- CAT 5, MEDICI -->
+<div class="section-header" id="cat-medici">5, Medici, dentisti, psicologi</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Sai che il mercato odontoiatrico italiano e super-inflazionato? Nelle grandi citta come Roma o Milano, la concorrenza degli studi dentistici e ormai poco sostenibile. Ecco perche il marketing sanitario non e un'opzione, ma un servizio necessario a sopravvivere."</p>
+  <div class="voc-meta"><span class="voc-tag">Settore medico</span><span class="voc-source">Promozione Medica</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"In Italia si contano circa 100.000 professionisti psicologi, quasi un terzo di tutta Europa. Meta di essi sono specializzati in psicoterapia, e vi sono realta locali, come Roma, dove e possibile trovare uno psicologo ogni circa 300 abitanti."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato settore</span><span class="voc-source">Promozione Medica</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Nel mercato sanitario iper-inflazionato di oggi, affidarsi esclusivamente al passaparola equivale a perdere circa il 77% dei potenziali pazienti. Questo perche oltre 3 quarti dei nuovi pazienti ormai trovano il loro Medico specialistico esclusivamente online."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato settore</span><span class="voc-source">Promozione Medica</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Cosa succede se una pagina web o una campagna web di un Medico viene giudicata irregolare? Perche il mio sito o la mia campagna promozionale e stata segnalata? Hai ricevuto un richiamo dal tuo ordine per il tuo sito web o la tua promozione sanitaria?"</p>
+  <div class="voc-meta"><span class="voc-tag">Frustrazione deontologica</span><span class="voc-source">Promozione Medica</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il settore odontoiatrico italiano affronta una crisi dovuta a molteplici fattori, l'assenza di un servizio capillare di odontoiatria pubblica, il calo sistematico del reddito medio degli italiani negli ultimi 30 anni, e uno dei redditi procapite piu bassi tra i grandi Paesi europei."</p>
+  <div class="voc-meta"><span class="voc-tag">Settore medico</span><span class="voc-source">Promozione Medica</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Qualita clinica non equivale a qualita percepita. Puoi anche essere il miglior professionista in citta, ma devi anche essere bravo a comunicarlo nel modo giusto."</p>
+  <div class="voc-meta"><span class="voc-tag">Insight settore</span><span class="voc-source">Swimme, settembre 2025</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"In un solo decennio, le ricerche su medicina e salute degli italiani sul web sono aumentate di circa il 26%. Hai perciò la possibilita di trovare nuovi pazienti semplicemente aumentando la tua visibilita su Google."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato settore</span><span class="voc-source">MioDottore</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"L'80% delle ricerche che riguardano informazioni commerciali sono effettuate su base locale, cioe associando i servizi ad un luogo specifico, ad esempio psicologo Roma."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato Google</span><span class="voc-source">MioDottore</span></div>
+</div>
+
+<!-- CAT 6, PMI B2B -->
+<div class="section-header" id="cat-pmi">6, Piccole imprese B2B</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il mercato e-commerce italiano ha raggiunto i 62 miliardi di euro nel 2025, eppure solo il 20,4% delle PMI vende online. Questo paradosso evidenzia un'opportunita enorme per le piccole e medie imprese italiane."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato mercato</span><span class="voc-source">DSCom, marzo 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Nonostante oltre il 70% delle PMI dichiari di aver avviato percorsi di digitalizzazione, la trasformazione resta incompiuta e prevalentemente di livello superficiale. Solo il 26,2% delle piccole e medie imprese si colloca a un livello alto di intensita digitale."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato mercato</span><span class="voc-source">Osservatorio e-Commerce</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Secondo i dati ISTAT, solo il 20,4% delle imprese con almeno 10 addetti ha effettuato vendite online nell'anno precedente, 1 su 5. Questo significa che quasi l'80% del tessuto produttivo italiano e ancora escluso dalla monetizzazione diretta tramite il canale e-commerce."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato ISTAT</span><span class="voc-source">Osservatorio e-Commerce</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"So che meta dei soldi che spendo in pubblicita e sprecata, il problema e che non so quale meta. Questa celebre frase riflette perfettamente la frustrazione di molti imprenditori italiani che vedono il marketing come un buco nero finanziario."</p>
+  <div class="voc-meta"><span class="voc-tag">Frase iconica</span><span class="voc-source">Micciche Fraschilla, aprile 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Per una PMI, dove ogni euro investito deve pesare come un macigno, il CAC non e un tecnicismo da agenzia di marketing, ma un indicatore di salute vitale per la sopravvivenza stessa del business."</p>
+  <div class="voc-meta"><span class="voc-tag">Insight strategico</span><span class="voc-source">AteneoWeb, marzo 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Facebook, Instagram e TikTok sono strumenti di comunicazione potenti, ma non sostituiscono un sito web. Eppure migliaia di PMI italiane gestiscono la propria presenza online esclusivamente attraverso i social media. Nessun controllo, le piattaforme social cambiano algoritmi, politiche e condizioni senza preavviso. Una pagina Facebook puo essere sospesa dall'oggi al domani."</p>
+  <div class="voc-meta"><span class="voc-tag">Articolo settore</span><span class="voc-source">Targatocn, marzo 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Le PMI italiane che crescono investono mediamente tra il 7% e il 12% del fatturato in marketing e comunicazione. Di questo budget, la quota digitale e passata dal 40% nel 2020 al 72% nel 2026."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato investimenti</span><span class="voc-source">Bliss Agency, 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Un'agenzia di marketing in Italia nel 2026 costa mediamente tra 1.500 euro e 15.000 euro al mese, con il 70% delle PMI che spende tra 2.000 e 5.000 euro per servizi multi-canale."</p>
+  <div class="voc-meta"><span class="voc-tag">Dato costi</span><span class="voc-source">Migliore Agenzia, aprile 2026</span></div>
+</div>
+
+<!-- CAT 7, CONSULENTI -->
+<div class="section-header" id="cat-consulenti">7, Consulenti e Freelance</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Per molti freelance il problema non e saper fare il proprio lavoro, ma trasformare competenze e tempo in progetti ben pagati e continui grazie al marketing digitale."</p>
+  <div class="voc-meta"><span class="voc-tag">Consulenti</span><span class="voc-source">Stefano Scetti, gennaio 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Ti arrivano richieste ma spesso da clienti poco in target e vuoi capire come attirare meglio le persone giuste. Vuoi un confronto esterno per verificare se il tuo piano di marketing e sostenibile rispetto al tempo e al budget che hai davvero."</p>
+  <div class="voc-meta"><span class="voc-tag">Consulenti</span><span class="voc-source">Stefano Scetti</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Fai preventivi al ribasso per paura di perdere il cliente o perche non hai chiaro il valore del tuo lavoro. Hai mille idee ma nessun metodo semplice per trasformarle in azioni di marketing settimana dopo settimana."</p>
+  <div class="voc-meta"><span class="voc-tag">Consulenti pain</span><span class="voc-source">Stefano Scetti</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Una routine di marketing sostenibile per creare contenuti e generare richieste senza andare in burnout. Un modo piu sicuro per collegare prezzi, offerte e tempi al valore che comunichi con il marketing."</p>
+  <div class="voc-meta"><span class="voc-tag">Consulenti desideri</span><span class="voc-source">Stefano Scetti</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Ho iniziato un percorso di consulenze e i risultati hanno superato ogni mia aspettativa. Ho ricevuto contatti da clienti piu qualificati e un aumento di poco meno del 40% nelle richieste. Ora ho chiarezza sulla mia posizione nel mercato e su come proseguire il mio progetto in autonomia."</p>
+  <div class="voc-meta"><span class="voc-tag">Testimonianza consulente</span><span class="voc-source">Recensione Google su Stefano Scetti</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Per farti un esempio semplice, se fatturiamo una consulenza di Web Marketing 1000 euro solo 500 euro ci restano in tasca in quanto i restanti 500 euro se ne vanno in tasse, inps, inail, commercialista, canoni software, trasferte e bollette."</p>
+  <div class="voc-meta"><span class="voc-tag">Freelance finanze</span><span class="voc-source">Nomadi Digitali</span></div>
+</div>
+
+<!-- CAT 8, SYSTEME.IO -->
+<div class="section-header" id="cat-systeme">8, Systeme.io, vantaggi e limiti</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Sto provando Systeme e devo dire che anche la versione gratuita offre funzionalita abbastanza avanzate. L'assistenza italiana e disponibile e fornisce supporto in tempi abbastanza rapidi."</p>
+  <div class="voc-meta"><span class="voc-tag">Recensione utente</span><span class="voc-source">Trustpilot Systeme.io</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Lo staff di Systeme.io e in particolare il servizio di assistenza italiana non smette mai di stupirmi. Marco Costa e stato gentile, professionale e risolutivo."</p>
+  <div class="voc-meta"><span class="voc-tag">Recensione utente</span><span class="voc-source">Trustpilot Systeme.io</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Col passaggio a Systeme ho avuto un netto miglioramento del tasso di apertura delle email, e su migliaia di contatti anche solo un 5% in piu e oro."</p>
+  <div class="voc-meta"><span class="voc-tag">Risultato concreto</span><span class="voc-source">ChefBlog</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Ho sempre avuto assistenza e risposta in poche ore, in genere nel gruppo risposta in pochi minuti, a volte anche alle 10 di sera ed avere un'assistenza in italiano ha un valore immenso."</p>
+  <div class="voc-meta"><span class="voc-tag">Assistenza</span><span class="voc-source">ChefBlog</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Systeme.io si presenta come uno strumento che ti permette di fare tutto su un'unica piattaforma e questo e un vantaggio notevole. In genere si chiamano piattaforme all in one e Systeme e la piu economica, free per chi inizia."</p>
+  <div class="voc-meta"><span class="voc-tag">Vantaggi</span><span class="voc-source">ChefBlog</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Systeme io ti permette di inviare email illimitate, creare sequenze automatizzate e segmentare i contatti. Non hai limiti di invio nemmeno nel piano gratuito, una cosa rara tra le piattaforme simili."</p>
+  <div class="voc-meta"><span class="voc-tag">Vantaggi</span><span class="voc-source">Studio Campisi, febbraio 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"In primo luogo, l'interfaccia e molto intuitiva. Inoltre, anche nella versione gratuita, la piattaforma permette di fare tantissime cose, sito, email marketing, gestione dei contatti."</p>
+  <div class="voc-meta"><span class="voc-tag">Vantaggi</span><span class="voc-source">Unidevs, settembre 2025</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Una speciale nota di merito va poi al supporto. Sempre disponibili, gli operatori rispondono tempestivamente, sono molto preparati e sanno fornire in pochi minuti la risoluzione ad ogni dubbio o problema."</p>
+  <div class="voc-meta"><span class="voc-tag">Supporto</span><span class="voc-source">Unidevs</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Design Limitato, le opzioni di personalizzazione delle landing page sono meno avanzate rispetto a piattaforme come ClickFunnels. Integrazioni Limitate, non supporta tutte le app di terze parti che potresti voler utilizzare."</p>
+  <div class="voc-meta"><span class="voc-tag">Limiti</span><span class="voc-source">Cashxflow, giugno 2025</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Non e WordPress e quindi c'e ovviamente un limite alla flessibilita di progettazione offerta. Non ha integrazione con strumenti e servizi esterni."</p>
+  <div class="voc-meta"><span class="voc-tag">Limiti</span><span class="voc-source">Lorenzo Gnesutta</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Mancanza di Funzionalita di E-commerce Avanzate, se cerchi una piattaforma per un negozio online complesso, potrebbe non essere la scelta migliore."</p>
+  <div class="voc-meta"><span class="voc-tag">Limiti</span><span class="voc-source">Cashxflow</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Price point, customer service and value for the money. The amount of products you get for the money is really what lead me to give Systeme.io a try. Also the free migration (which went smoothly) was a bonus."</p>
+  <div class="voc-meta"><span class="voc-tag">Recensione internazionale</span><span class="voc-source">Capterra</span></div>
+</div>
+
+<!-- CAT 9, COSTI MARKETING -->
+<div class="section-header" id="cat-costi">9, Costi del marketing e budget</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il costo di un'agenzia marketing si articola su tre livelli, fascia entry 1.500-3.000 euro al mese per PMI che attivano due-tre canali principali, fascia media 3.000-8.000 euro al mese per aziende strutturate con gestione multi-canale e reporting avanzato, fascia top 8.000-25.000 euro al mese per realta enterprise."</p>
+  <div class="voc-meta"><span class="voc-tag">Costi mercato</span><span class="voc-source">Migliore Agenzia, aprile 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Queste cifre si riferiscono alla fee agenzia, non al budget pubblicitario. Se l'agenzia gestisce Google Ads o Meta Ads, il budget media va sommato a parte, per una PMI italiana il budget advertising medio si attesta intorno a 1.500-5.000 euro al mese aggiuntivi."</p>
+  <div class="voc-meta"><span class="voc-tag">Costi mercato</span><span class="voc-source">Migliore Agenzia</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"La fee di gestione nel mercato italiano nel 2026 si colloca tra 500 euro e 5.000 euro al mese. Il range e ampio perche i tier di servizio coprono scenari molto diversi."</p>
+  <div class="voc-meta"><span class="voc-tag">Costi mercato</span><span class="voc-source">Bliss Agency, 2026</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Una regola empirica per le PMI e destinare tra il 5% e il 10% del fatturato lordo al marketing. Esempio, se fatturi 100.000 euro l'anno, dovresti investire tra i 5.000 euro e i 10.000 euro per mantenere o far crescere quel fatturato."</p>
+  <div class="voc-meta"><span class="voc-tag">Budget PMI</span><span class="voc-source">Dingolab, dicembre 2025</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Se qualcuno ti offre un sito a 300 euro o la SEO a 50 euro al mese, scappa. Nessun professionista puo lavorare a quelle cifre garantendo qualita. Stai comprando un problema, non una soluzione."</p>
+  <div class="voc-meta"><span class="voc-tag">Avvertimento</span><span class="voc-source">Dingolab</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Molti imprenditori pensano di risparmiare gestendo i social da soli o facendo il sito con piattaforme gratuite. Il costo nascosto e enorme, il tuo tempo, mancati guadagni, danno d'immagine."</p>
+  <div class="voc-meta"><span class="voc-tag">Costo fai da te</span><span class="voc-source">Dingolab</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Un percorso da 3.000 euro al mese che ti aiuta a smettere di sprecare 1.500 euro al mese in attivita che non portano risultati si ripaga in poco tempo. Una consulenza piu economica che ti lascia con un documento pieno di suggerimenti generici che non applichi e cara a qualsiasi prezzo."</p>
+  <div class="voc-meta"><span class="voc-tag">Costi consulenza</span><span class="voc-source">Stefano Scetti</span></div>
+</div>
+
+<!-- FRASI KILLER PER COPY -->
+<div class="section-header" id="frasi-killer">10, Frasi killer per il copy</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione, le 30 frasi piu potenti emerse dalla VOC, pronte da usare in headline, sottotitoli, email outbound. Sono le piu efficaci perche pescano dalle parole esatte del target.</p>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Hai cambiato 3 agenzie e i clienti ancora non arrivano. Non e marketing che non funziona. E il modo."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, headline outbound</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il tuo sito non porta clienti. Non perche e brutto. Perche nessuno lo trova."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, headline architetti</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"3 secondi. Tanto basta a un visitatore per decidere se restare sul tuo sito o andarsene."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, headline universale</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"77%. La percentuale di pazienti che perdi se affidi tutto al passaparola."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, headline medici</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Paghi 2.000 euro al mese all'agenzia. Non sai cosa fanno. Non vedi risultati."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, apertura email outbound</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"WordPress e gratuito. Tutto il resto costa 7.000 euro l'anno."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, contro-WordPress</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Hai un sito vetrina, non un sistema di marketing."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, headline B2B</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il 99% dei siti di architetti e inutile. Il tuo e tra questi?"</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, hook architetti</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Like e visualizzazioni non pagano le bollette. Lo sai."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, contro-social</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Hai gia provato 2 agenzie. La terza non e la soluzione. Il sistema lo e."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, anti-agenzia</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"L'80% delle PMI italiane non vende online. Il problema non e internet. E il sistema sbagliato."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, B2B PMI</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Solo il 20% delle PMI italiane vende online. L'80% perde l'opportunita."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, B2B PMI</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Stai pagando l'account senior, ma a lavorare sul tuo account c'e un junior con 6 mesi di esperienza."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, anti-agenzia</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"So che meta dei soldi che spendo in pubblicita e sprecata, il problema e che non so quale meta."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, frase iconica imprenditori</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Senza metodo si fanno attivita. Con il metodo si costruisce un sistema."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, posizionamento</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Hai pagato per il sito. Hai pagato per i social. Hai pagato per le ads. E i clienti? Ancora pochi."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, agitazione problema</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"47 euro al mese al posto di 2.000. E il tuo team commerciale lavora sui clienti caldi, non insegue freddi."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, prezzo Systeme</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"L'agenzia ti ha lasciato un sito che invecchia. Il sistema giusto ti lascia un'azienda che cresce."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, posizionamento</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Non e questione di trovare l'agenzia giusta. E questione di smettere di dipendere da un'agenzia."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, posizionamento</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il tuo sito su Google non c'e. Letteralmente. Hai pagato per essere invisibile."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, architetti, medici</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"La buona notizia, ti ho gia rifatto il sito. La cattiva, il tuo attuale e ancora online."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, apertura outbound</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Sul tuo sito 100 persone arrivano. 1 compila il modulo. Le altre 99 le hai perse per sempre."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, conversion</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Settimana scorsa ho rifatto il sito di [tipo professionista]. Stamattina ha gia 3 richieste qualificate. Il tuo, nel frattempo, e fermo."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, social proof</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Hosting, plugin, agenzia, manutenzione. 7.000 euro l'anno per un sito che non porta clienti. Lo sai, vero?"</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, contro-WordPress</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Non ti chiedo di firmare nulla. Ti mando il link del sito gia pronto. Lo guardi, decidi tu."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, chiusura outbound senza pressione</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il passaparola e bello quando funziona. Quando si ferma, il fatturato si ferma con lui."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, professionisti</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Spendi 4 ore a settimana sui social. Sono 800 euro al mese del tuo tempo. Per quanti clienti reali?"</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, costo opportunita</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il sistema funziona anche di notte. Tu dormi, lui qualifica i tuoi prossimi clienti."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, vantaggio sistema</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"6 mesi prima di vedere risultati, dicono le agenzie. 30 giorni, dice il sistema che ti propongo."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, contro-agenzie</span></div>
+</div>
+
+<div class="voc-item">
+  <p class="voc-text">"Il tuo problema non e il sito. E la mancanza di un percorso che porta lo sconosciuto a diventare cliente."</p>
+  <div class="voc-meta"><span class="voc-tag">Uso, posizionamento strategia</span></div>
+</div>
+
+</div>
+
+<footer class="bc-footer">
+  <p>Preparato secondo il <strong>Metodo Bentivoglio</strong> da <strong>Bentivoglio Consulting</strong></p>
+  <p>&copy; 2026 Bentivoglio Consulting, Tutti i diritti riservati</p>
+  <p style="font-size: 0.75rem; color: #666;">Database VOC Grezzo v1.0, generato in data 17/05/2026, 09:34</p>
+  <p style="font-size: 0.75rem; color: #666;">Documento companion del Report Strategico Analisi VOC Multi-Target</p>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+<script>
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const offset = 80;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({top: top, behavior: 'smooth'});
+  }
+}
+
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('scrollTop');
+  if (window.pageYOffset > 400) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+</script>
+
+</body>
+</html>
