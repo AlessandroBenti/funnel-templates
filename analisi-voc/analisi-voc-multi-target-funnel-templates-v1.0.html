@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Analisi VOC Multi-Target, Funnel Templates v1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { font-family: 'Montserrat', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0c0c0c; color: #e8e8e8; line-height: 1.7; }
+a { color: #f0b41a; text-decoration: none; }
+
+/* HEADER */
+.bc-header { background: #111; border-bottom: 3px solid #f0b41a; padding: 28px 40px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+.bc-header-left { flex: 1; min-width: 300px; }
+.bc-logo { color: #f0b41a; font-weight: 800; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+.bc-skill-name { color: #f5f5f5; font-weight: 700; font-size: 1.5rem; display: block; margin-bottom: 8px; }
+.bc-desc { color: #aaa; font-size: 0.92rem; line-height: 1.5; max-width: 600px; }
+.bc-header-right { text-align: right; font-size: 0.78rem; }
+.meta-row { margin-bottom: 4px; line-height: 1.5; }
+.meta-label { color: #888; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.meta-label::after { content: ":"; }
+.meta-value { color: #ddd; font-size: 11px; margin-left: 4px; }
+.version-badge { background: #f0b41a; color: #000; padding: 3px 8px; border-radius: 3px; font-weight: 700; font-size: 0.7rem; letter-spacing: 1px; display: inline-block; margin-bottom: 6px; }
+
+/* NAV STICKY */
+.sticky-nav { background: #181818; padding: 14px 40px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #2a2a2a; overflow-x: auto; white-space: nowrap; }
+.sticky-nav a { color: #aaa; margin-right: 22px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: color 0.2s; }
+.sticky-nav a:hover { color: #f0b41a; }
+.sticky-nav a.active { color: #f0b41a; border-bottom: 2px solid #f0b41a; padding-bottom: 4px; }
+
+/* CONTENT */
+.content { max-width: 1180px; margin: 0 auto; padding: 50px 40px; }
+h2 { color: #f0b41a; font-size: 1.8rem; font-weight: 800; margin: 50px 0 20px; }
+h3 { color: #fff; font-size: 1.3rem; font-weight: 700; margin: 30px 0 14px; }
+h4 { color: #f0b41a; font-size: 1.05rem; font-weight: 700; margin: 22px 0 10px; }
+p { margin-bottom: 14px; color: #d8d8d8; }
+strong { color: #fff; }
+
+.section-header { background: #f0b41a; color: #000; padding: 14px 22px; font-weight: 800; font-size: 1.05rem; border-radius: 4px; display: inline-block; margin-top: 60px; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 1px; }
+.intro-box { background: #161616; border-left: 4px solid #f0b41a; padding: 22px 26px; margin-bottom: 32px; border-radius: 4px; }
+.intro-box p { color: #c8c8c8; margin: 0; font-size: 0.95rem; }
+
+.card { background: #161616; border-left: 4px solid #f0b41a; padding: 24px 28px; border-radius: 4px; margin-bottom: 22px; }
+.card-title { color: #f0b41a; font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; }
+
+/* TABLE */
+table { border-collapse: collapse; width: 100%; margin: 18px 0 30px; background: #111; border-radius: 4px; overflow: hidden; }
+th { background: #f0b41a; color: #000; font-weight: 700; padding: 12px 14px; text-align: left; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+td { border: 1px solid #2a2a2a; padding: 12px 14px; color: #e0e0e0; font-size: 0.9rem; vertical-align: top; }
+tr:nth-child(even) td { background: #141414; }
+td.intensity-alta { color: #f0b41a; font-weight: 700; }
+td.intensity-media { color: #fff; font-weight: 600; }
+
+/* QUOTE BOX */
+.quote { background: #1a1a1a; border-left: 3px solid #f0b41a; padding: 14px 20px; margin: 12px 0; font-style: italic; color: #d0d0d0; font-size: 0.93rem; }
+.quote-source { display: block; color: #888; font-size: 0.78rem; font-style: normal; margin-top: 6px; }
+
+/* STATS */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin: 26px 0; }
+.stat-card { background: #161616; padding: 22px; border-radius: 4px; border-top: 3px solid #f0b41a; }
+.stat-number { color: #f0b41a; font-size: 2.2rem; font-weight: 800; line-height: 1; }
+.stat-label { color: #aaa; font-size: 0.85rem; margin-top: 8px; }
+
+/* TARGET BLOCK */
+.target-block { background: #131313; border: 1px solid #2a2a2a; border-radius: 6px; padding: 30px 32px; margin-bottom: 40px; }
+.target-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 2px solid #f0b41a; }
+.target-number { background: #f0b41a; color: #000; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; flex-shrink: 0; }
+.target-title { color: #fff; font-size: 1.5rem; font-weight: 700; }
+
+.problem-card { background: #1a1a1a; border-left: 4px solid #f0b41a; padding: 18px 22px; margin-bottom: 16px; border-radius: 4px; }
+.problem-title { color: #f0b41a; font-weight: 700; font-size: 1.02rem; margin-bottom: 8px; }
+.problem-frequency { display: inline-block; background: #f0b41a; color: #000; padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; margin-left: 10px; text-transform: uppercase; }
+
+.trigger-box { background: #1f1f1f; padding: 18px 22px; border-radius: 4px; margin: 14px 0; }
+.trigger-box strong { color: #f0b41a; }
+
+.copy-message { background: #0f0f0f; border: 1px solid #f0b41a; padding: 20px 24px; border-radius: 4px; margin-top: 18px; }
+.copy-message-label { color: #f0b41a; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.copy-message-text { color: #fff; font-size: 0.95rem; font-style: italic; }
+
+/* FOOTER */
+.bc-footer { background: #111; border-top: 3px solid #f0b41a; padding: 32px 40px; margin-top: 60px; text-align: center; }
+.bc-footer p { color: #aaa; font-size: 0.85rem; margin: 4px 0; }
+.bc-footer strong { color: #f0b41a; }
+
+.toc-mini { background: #161616; padding: 22px 26px; border-radius: 4px; margin: 26px 0; }
+.toc-mini ul { list-style: none; padding: 0; }
+.toc-mini li { padding: 6px 0; color: #d0d0d0; }
+.toc-mini li::before { content: "▸ "; color: #f0b41a; font-weight: 700; }
+
+/* SCROLL TOP */
+#scrollTop { position: fixed; bottom: 30px; right: 30px; background: #f0b41a; color: #000; width: 46px; height: 46px; border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; font-weight: 800; font-size: 1.2rem; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+#scrollTop.show { display: flex; }
+
+@media (max-width: 768px) {
+  .bc-header { padding: 20px 22px; }
+  .content { padding: 30px 22px; }
+  .target-block { padding: 22px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="bc-header">
+  <div class="bc-header-left">
+    <span class="bc-logo">BENTIVOGLIO CONSULTING</span>
+    <span class="bc-skill-name">Analisi VOC Multi-Target, Funnel Templates</span>
+    <p class="bc-desc">Ricerca Voice of Customer su 4 target prioritari per la strategia outbound del progetto Funnel Templates. Mappatura completa di problemi, frustrazioni, linguaggio, trigger di acquisto e messaggi outbound costruiti dalle parole del target stesso. Include analisi Systeme.io vs concorrenti.</p>
+  </div>
+  <div class="bc-header-right">
+    <span class="version-badge">v1.0</span>
+    <div class="meta-row"><span class="meta-label">Progetto</span><span class="meta-value">Funnel Templates, Strategia Outbound</span></div>
+    <div class="meta-row"><span class="meta-label">Data creazione</span><span class="meta-value">17/05/2026, 09:30</span></div>
+    <div class="meta-row"><span class="meta-label">Fonte dati</span><span class="meta-value">Ricerca VOC web (90+ fonti consultate)</span></div>
+    <div class="meta-row"><span class="meta-label">Output</span><span class="meta-value">Report strategico</span></div>
+  </div>
+</header>
+
+<nav class="sticky-nav">
+  <a onclick="scrollToSection('top')">Top</a>
+  <a onclick="scrollToSection('sintesi')">Sintesi esecutiva</a>
+  <a onclick="scrollToSection('problemi-comuni')">Problemi comuni</a>
+  <a onclick="scrollToSection('target1')">1. Consulenti, Coach</a>
+  <a onclick="scrollToSection('target2')">2. Architetti, Ingegneri</a>
+  <a onclick="scrollToSection('target3')">3. Medici privati</a>
+  <a onclick="scrollToSection('target4')">4. PMI B2B</a>
+  <a onclick="scrollToSection('systeme')">Systeme.io</a>
+  <a onclick="scrollToSection('confronto')">Confronto piattaforme</a>
+  <a onclick="scrollToSection('insight')">Insight strategici</a>
+  <a onclick="scrollToSection('outbound')">Framework outbound</a>
+</nav>
+
+<div class="content" id="top">
+
+<!-- SINTESI -->
+<div class="section-header" id="sintesi">1, Sintesi esecutiva</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: il quadro generale di quello che e emerso dalla ricerca VOC. Da qui parti per capire il contesto, poi vai nelle sezioni dei target specifici per i dettagli operativi.</p>
+</div>
+
+<div class="card">
+<p>Questa analisi parte da un'osservazione semplice. Il mercato italiano e pieno di professionisti e piccole imprese che hanno un sito web, ma il sito non porta clienti. Hanno provato agenzie e sono rimasti delusi. Hanno provato il fai da te e si sono persi tra plugin, hosting e codice che non sanno toccare. Hanno provato i social ma hanno capito che senza un sistema di marketing dietro, i like non pagano le bollette.</p>
+
+<p>L'opportunita per Funnel Templates e enorme. I dati di mercato dicono chiaramente che solo il 20,4% delle PMI italiane vende online, nonostante oltre il 70% abbia "fatto qualcosa" sul digitale. C'e quindi un divario gigante tra l'investimento iniziale (sito, social, agenzia) e il risultato vero (clienti che arrivano dal web). La nostra strategia outbound si inserisce esattamente in questo divario, offriamo il sito rifatto + la strategia di marketing dietro, su una piattaforma (Systeme.io) che da il controllo e i risultati.</p>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-number">20,4%</div>
+    <div class="stat-label">PMI italiane con almeno 10 addetti che vendono online (Istat 2024)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">75%</div>
+    <div class="stat-label">Siti di studi di architettura con indicizzazione errata o assente</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">99%</div>
+    <div class="stat-label">Siti di architetti definiti "totalmente inutili" da analisti di settore</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">800-5.000€</div>
+    <div class="stat-label">Fee mensile media agenzia PMI italiana (escluso budget media)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">3 sec</div>
+    <div class="stat-label">Tempo medio prima dell'abbandono di un sito da parte del visitatore</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">70%+</div>
+    <div class="stat-label">Traffico web da smartphone, eppure molti siti non sono ottimizzati</div>
+  </div>
+</div>
+
+<div class="toc-mini">
+  <p style="margin-bottom: 10px; color: #f0b41a; font-weight: 700;">Cosa trovi in questo report:</p>
+  <ul>
+    <li><strong>I 5 problemi trasversali</strong> che colpiscono tutti i target, indipendentemente dal settore</li>
+    <li><strong>Per ognuno dei 4 target prioritari</strong>: problemi specifici, citazioni reali, trigger di acquisto, linguaggio da usare, messaggio outbound consigliato</li>
+    <li><strong>Analisi Systeme.io</strong>: vantaggi, limiti reali, benefici percepiti dagli utenti</li>
+    <li><strong>Confronto con i concorrenti</strong>: WordPress, agenzie tradizionali, Wix, ClickFunnels</li>
+    <li><strong>Insight strategici</strong> e <strong>framework per i messaggi outbound</strong></li>
+  </ul>
+</div>
+
+<!-- PROBLEMI COMUNI -->
+<div class="section-header" id="problemi-comuni">2, I 5 problemi che colpiscono tutti i target</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: i problemi trasversali, quelli che troverai in qualsiasi conversazione con un professionista o un piccolo imprenditore italiano. Usa questi come "punti d'ingresso universali" nei messaggi outbound quando non sai ancora bene chi hai davanti.</p>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">1. Soldi spesi in agenzia senza risultati <span class="problem-frequency">Altissima frequenza</span></div>
+  <p>E il problema piu citato in assoluto. Le persone hanno pagato cifre tra 800 e 5.000 euro al mese per mesi (a volte anni) senza vedere arrivare clienti concreti. Si sentono prese in giro. Hanno cambiato 2 o 3 agenzie sperando in risultati diversi e si sono ritrovate con la stessa frustrazione.</p>
+  <div class="quote">
+    "Aziende che rifanno il sito, investono nei social, provano campagne, cambiano agenzia, e dopo mesi si ritrovano con pochi risultati, poca chiarezza e molta frustrazione. La parte piu pericolosa e che iniziano a pensare che il marketing non funzioni."
+    <span class="quote-source">Roma Comunica Web, aprile 2026</span>
+  </div>
+  <div class="quote">
+    "Una buona agenzia non vende solo servizi, costruisce una direzione. Quello che conta davvero e la capacita di generare contatti, richieste e clienti attraverso un sistema coerente. Le PMI sbagliano con le agenzie web quando scelgono in base al prezzo, all'estetica o alle promesse veloci."
+    <span class="quote-source">Web Style Studio, 2026</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">2. Sito web che non porta clienti <span class="problem-frequency">Altissima frequenza</span></div>
+  <p>Hanno un sito ma e una vetrina morta. Bello esteticamente (a volte), ma nessuno lo trova, nessuno compila i moduli, nessuno chiama dopo averlo visto. Il sito e un costo, non un investimento.</p>
+  <div class="quote">
+    "Il sito fatto dal cugino che sa usare il computer, la pagina creata con un builder gratuito in un pomeriggio, generano un'immagine poco professionale che allontana i clienti invece di attrarli. Un visitatore impiega meno di 3 secondi per decidere se restare o andarsene."
+    <span class="quote-source">Targatocn, marzo 2026</span>
+  </div>
+  <div class="quote">
+    "Il 99% dei siti di architetti e totalmente inutile, minimalista, con immagini pesanti e non ottimizzato per i motori di ricerca. Se hai un sito minimalista senza spiegazione chiara dei tuoi servizi, molto probabilmente non ti ha mai contattato nessun cliente."
+    <span class="quote-source">Giacomo Cellini, settembre 2024</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">3. Mancanza di controllo e visibilita sui dati <span class="problem-frequency">Alta frequenza</span></div>
+  <p>Pagano un'agenzia ogni mese ma non sanno cosa sta facendo davvero. Non ricevono report. Non hanno accesso ai numeri. Si sentono ostaggio di chi gestisce il loro marketing.</p>
+  <div class="quote">
+    "Paghi ogni mese per un servizio di gestione o marketing, ma non sai cosa stanno facendo? Un'agenzia trasparente ti invia report dettagliati su traffico, lead e ottimizzazioni. Se non ricevi nulla, probabilmente non stanno lavorando sul tuo sito. Tu dovresti avere accesso diretto ai dati di Google Analytics per vedere direttamente le statistiche."
+    <span class="quote-source">Alberto Pozzi, febbraio 2025</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">4. Strumenti tecnici troppo complicati per gestire in autonomia <span class="problem-frequency">Alta frequenza</span></div>
+  <p>WordPress, plugin, hosting, dominio, certificati SSL, page builder. Il fai da te tecnico spaventa. Chi prova si blocca al secondo errore. Chi paga una persona per gestirlo si trova dipendente.</p>
+  <div class="quote">
+    "Il sito rallenta dopo ogni aggiornamento. Un plugin rompe qualcosa che funzionava. La manutenzione mensile costa piu di quanto preventivato. E ogni volta che sembra risolto, il problema torna, magari con una faccia diversa. Non e sfortuna, e architettura."
+    <span class="quote-source">Keidea CMS, maggio 2026</span>
+  </div>
+  <div class="quote">
+    "Hosting dedicato per prestazioni accettabili, 50-200 euro al mese, 1.800-7.200 euro su 3 anni. Plugin premium per SEO, sicurezza, form, e-commerce, backup, 300-800 euro all'anno. Manutenzione mensile se affidata a un'agenzia, 100-300 euro al mese, 3.600-10.800 euro su 3 anni."
+    <span class="quote-source">Keidea CMS, costi reali stack WordPress su 3 anni</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">5. Strategia assente, solo "facciata" <span class="problem-frequency">Alta frequenza</span></div>
+  <p>Hanno il sito, hanno i social, hanno magari fatto qualche campagna. Ma manca il quadro generale, il percorso che porta uno sconosciuto a diventare cliente. Tutto e scollegato.</p>
+  <div class="quote">
+    "Spesso acquistano singoli servizi senza una strategia che li colleghi. Un sito da solo non basta. Deve essere parte di un sistema. Senza metodo si fanno attivita. Con il metodo si costruisce un sistema."
+    <span class="quote-source">Roma Comunica Web, aprile 2026</span>
+  </div>
+  <div class="quote">
+    "So che meta dei soldi che spendo in pubblicita e sprecata, il problema e che non so quale meta. Questa celebre frase riflette perfettamente la frustrazione di molti imprenditori italiani che vedono il marketing come un buco nero finanziario."
+    <span class="quote-source">Micciche Fraschilla e Partners, aprile 2026</span>
+  </div>
+</div>
+
+<!-- TARGET 1 -->
+<div class="section-header" id="target1">3, Target 1, Consulenti e Coach (business, marketing, vendite)</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: i problemi specifici dei consulenti e coach italiani, le citazioni dirette, il loro linguaggio tipico, i momenti in cui sono piu ricettivi a un messaggio outbound, e una proposta di messaggio costruito sulle loro parole.</p>
+</div>
+
+<div class="target-block">
+  <div class="target-header">
+    <div class="target-number">1</div>
+    <div class="target-title">Consulenti, Coach, Freelance del marketing</div>
+  </div>
+
+  <h4>Chi sono</h4>
+  <p>Professionisti che vendono il proprio tempo e la propria competenza. Consulenti di business, coach, marketing freelance, social media manager, copywriter, formatori. Lavorano spesso da soli o con un piccolo team. Tipicamente con un sito personale o vetrina, ma con poca visibilita organica e poca lead generation strutturata.</p>
+
+  <h4>I loro 5 problemi principali</h4>
+
+  <div class="problem-card">
+    <div class="problem-title">Difficolta a trovare clienti qualificati in modo continuativo <span class="problem-frequency">Massima</span></div>
+    <p>Vivono di passaparola e di periodi alterni di "pieno-vuoto". Quando il passaparola si ferma, il fatturato crolla.</p>
+    <div class="quote">"Per molti freelance il problema non e saper fare il proprio lavoro, ma trasformare competenze e tempo in progetti ben pagati e continui grazie al marketing digitale."
+      <span class="quote-source">Stefano Scetti, gennaio 2026</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Posizionamento confuso, parlano a tutti e quindi a nessuno <span class="problem-frequency">Alta</span></div>
+    <p>Cercano di essere generalisti per non perdere clienti, ma cosi diventano interscambiabili con migliaia di concorrenti.</p>
+    <div class="quote">"Hai tanti progetti diversi ma sempre con margini bassi, fai preventivi al ribasso per paura di perdere il cliente o perche non hai chiaro il valore del tuo lavoro. Hai mille idee ma nessun metodo semplice per trasformarle in azioni di marketing settimana dopo settimana."
+      <span class="quote-source">Stefano Scetti, gennaio 2026</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Sito personale poco efficace, piu vetrina che strumento di vendita <span class="problem-frequency">Alta</span></div>
+    <p>Hanno il sito "biglietto da visita" con la pagina chi sono, servizi, contatti. Ma il sito non e costruito per convertire, non ha una proposta chiara, un percorso, un lead magnet, un funnel.</p>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Si trovano a vendere a basso prezzo per riempire l'agenda <span class="problem-frequency">Media-Alta</span></div>
+    <p>Lavorano molto, fatturano poco, hanno preventivi al ribasso. Non riescono a giustificare prezzi alti perche non comunicano il valore.</p>
+    <div class="quote">"Per farti un esempio semplice, se fatturiamo una consulenza di Web Marketing 1000 euro solo 500 euro ci restano in tasca in quanto i restanti 500 euro se ne vanno in tasse, inps, inail, commercialista, canoni software."
+      <span class="quote-source">Nomadi Digitali, esempio reale</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Dispersione, troppe attivita di marketing scollegate <span class="problem-frequency">Alta</span></div>
+    <p>Pubblicano su LinkedIn, fanno qualche post Instagram, mandano qualche newsletter ogni tanto, magari hanno provato i webinar. Ma senza un sistema che colleghi tutto, l'energia si disperde.</p>
+  </div>
+
+  <div class="trigger-box">
+    <strong>I loro trigger di acquisto (quando si attivano a cercare una soluzione):</strong>
+    <ul style="margin-top: 8px; padding-left: 22px; color: #d0d0d0;">
+      <li>Hanno appena perso un cliente importante e l'agenda si svuota</li>
+      <li>Hanno raggiunto un plateau di fatturato che non riescono a superare</li>
+      <li>Si rendono conto che senza il passaparola sarebbero in difficolta</li>
+      <li>Hanno provato un'agenzia e sono rimasti delusi</li>
+      <li>Stanno per fare un cambio di posizionamento (nicchia, prezzo, offerta)</li>
+      <li>Inizio anno o rientro post-ferie estive (momento di "ridefinizione")</li>
+    </ul>
+  </div>
+
+  <h4>Linguaggio tipico che usano</h4>
+  <p><strong>Parole che usano:</strong> "non riesco a", "vorrei riuscire", "non ho chiarezza", "perdo tempo in", "metodo", "sistema", "strategia", "posizionamento", "il mio target", "i miei clienti ideali", "valore del mio lavoro", "preventivi al ribasso", "burnout", "burnout creativo", "scollegato", "disperso".</p>
+  <p><strong>Parole che NON usano (evitare nei messaggi):</strong> "imbuto" (in italiano), "lead generation" (capiscono solo gli addetti ai lavori), "scaling" (suona da guru).</p>
+
+  <div class="copy-message">
+    <div class="copy-message-label">Messaggio outbound consigliato per questo target</div>
+    <div class="copy-message-text">"Sei un consulente bravo. Hai i clienti che ti scelgono per passaparola, ma fatichi a far arrivare nuovi clienti dal web. Il tuo sito e una vetrina dove racconti chi sei e cosa fai, ma non genera contatti. Ho dato un'occhiata al tuo sito [URL] e ti ho costruito una versione che fa una cosa precisa, trasforma chi atterra sulla pagina in un contatto qualificato. Te la mando, e gratis vederla, decidi tu se serve."</div>
+  </div>
+</div>
+
+<!-- TARGET 2 -->
+<div class="section-header" id="target2">4, Target 2, Architetti e Ingegneri</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: il quadro della categoria architetti e ingegneri, i problemi specifici legati al loro modo di lavorare e alla loro deontologia, le citazioni reali, e i messaggi outbound che funzionano.</p>
+</div>
+
+<div class="target-block">
+  <div class="target-header">
+    <div class="target-number">2</div>
+    <div class="target-title">Architetti, Studi di Architettura, Ingegneri</div>
+  </div>
+
+  <h4>Chi sono</h4>
+  <p>Professionisti tecnici che lavorano su progetti (residenziali, commerciali, industriali, urbanistici). Hanno una formazione tecnica e poca dimestichezza con il marketing. Tipicamente con un sito-portfolio molto visivo ma poco efficace come strumento di vendita. Hanno paura di "sembrare commerciali" perche temono di sminuire la professione.</p>
+
+  <h4>I loro 5 problemi principali</h4>
+
+  <div class="problem-card">
+    <div class="problem-title">Siti vetrina che non generano contatti <span class="problem-frequency">Massima</span></div>
+    <p>E il problema piu denunciato da chi conosce il settore. Siti bellissimi esteticamente, pieni di immagini di progetti, ma totalmente incapaci di convertire un visitatore in un cliente potenziale.</p>
+    <div class="quote">"La maggior parte degli architetti e degli studi di architettura e ancora dotato di un semplice sito web vetrina e profili social che, solitamente, generano ben pochi contatti."
+      <span class="quote-source">Marketing Focalizzato, maggio 2025</span>
+    </div>
+    <div class="quote">"Il 99% dei siti di architetti e totalmente inutile perche minimalista, con immagini pesanti in alta risoluzione e soprattutto non ottimizzato per i motori di ricerca. Se hai un sito minimalista, senza blog, senza alcuna spiegazione chiara dei tuoi servizi, con grandi immagini pesanti e non mobile responsive, molto probabilmente non ti ha mai contattato nessun cliente."
+      <span class="quote-source">Giacomo Cellini, settembre 2024</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Indicizzazione SEO inesistente o errata <span class="problem-frequency">Massima</span></div>
+    <p>Tre quarti dei siti di studi di architettura non sono trovabili su Google. Sono invisibili al loro stesso target.</p>
+    <div class="quote">"Solo il 25% delle pagine web degli studi d'architettura presenti in Italia e stata correttamente impostata per essere indicizzata dai motori di ricerca. Circa il 75% delle pagine web riferibili agli studi d'architettura presentano un'indicizzazione web inesistente o addirittura errata."
+      <span class="quote-source">Unione Architetti, 2021 (dato confermato in piu fonti recenti)</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Cliente ideale fa scelte online ma loro non sono visibili li <span class="problem-frequency">Alta</span></div>
+    <p>Il loro target (privati che ristrutturano, aziende che hanno bisogno di progettazione) cerca su Google, su Instagram, legge recensioni. Loro sono fermi al passaparola.</p>
+    <div class="quote">"Cresce esponenzialmente il numero di persone che fanno scelte e prendono decisioni effettuando ricerche online sui motori di ricerca e sulle piattaforme di intelligenza artificiale. Bisogna dotarsi di un sistema per attrarre nuovi potenziali clienti, avendo chiaro come riuscire a trasformarli in clienti reali."
+      <span class="quote-source">Marketing Focalizzato, maggio 2025</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Concorrenza che cresce in modo non controllabile <span class="problem-frequency">Alta</span></div>
+    <p>Geometri, ingegneri edili, societa di ingegneria, perfino agenzie immobiliari offrono servizi simili. Distinguersi diventa sempre piu difficile senza una strategia di comunicazione chiara.</p>
+    <div class="quote">"Il mercato disponibile si ridimensiona in assenza di incentivi e non e totalmente appannaggio dei soli architetti perche vi sono altre figure professionali con competenze simili (societa di ingegneria, ingegneri edili, geometri) che operano nello stesso mercato."
+      <span class="quote-source">Marketing Focalizzato, maggio 2025</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Hanno provato il marketing senza risultati e ora sono diffidenti <span class="problem-frequency">Alta</span></div>
+    <p>Molti hanno gia speso soldi in agenzie o consulenti e si sono ritrovati con un sito rifatto, qualche post, e zero clienti in piu. Sono ora "anticorpi marketing".</p>
+    <div class="quote">"Il web marketing non funziona, ho speso solo tempo e denaro inutilmente, non ho ricevuto dal mio sito web e dai social nemmeno un contatto. Ho provato di tutto e fatto tutto il possibile ma non ho ottenuto risultati."
+      <span class="quote-source">Marketing Focalizzato, citazione di clienti reali, 2025</span>
+    </div>
+  </div>
+
+  <div class="trigger-box">
+    <strong>I loro trigger di acquisto:</strong>
+    <ul style="margin-top: 8px; padding-left: 22px; color: #d0d0d0;">
+      <li>Periodo di scarsita di nuovi progetti (mesi senza incarichi)</li>
+      <li>Apertura di un nuovo studio o ristrutturazione del brand</li>
+      <li>Decisione di specializzarsi in una nicchia specifica</li>
+      <li>Hanno appena perso una commessa importante a un concorrente</li>
+      <li>Vedono colleghi piu giovani crescere grazie al digitale</li>
+    </ul>
+  </div>
+
+  <h4>Linguaggio tipico</h4>
+  <p><strong>Parole che usano:</strong> "studio", "progetto", "incarico", "committente", "ristrutturazione", "progettazione", "portfolio", "deontologia", "specializzazione".</p>
+  <p><strong>Da evitare:</strong> "lead", "conversione", "funnel". Loro non parlano cosi.</p>
+
+  <div class="copy-message">
+    <div class="copy-message-label">Messaggio outbound consigliato</div>
+    <div class="copy-message-text">"Architetto Rossi, ho guardato il sito del suo studio. Esteticamente e bello, si vede il valore del lavoro. Ma c'e un problema tecnico, su Google non lo trova nessuno. Quando qualcuno cerca [tipo specifico di progetto] nella sua zona, il sito non appare nei risultati. Ho rifatto la struttura del sito tenendo intatta l'estetica ma aggiungendo quello che serve per essere trovati dai clienti che gia cercano architetti come lei. Le mando il link, e gratis vederlo."</div>
+  </div>
+</div>
+
+<!-- TARGET 3 -->
+<div class="section-header" id="target3">5, Target 3, Medici e professionisti della salute (privati)</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: i problemi dei medici, dentisti, psicologi e altri professionisti sanitari privati. Settore con regole deontologiche stringenti, mercato iper-affollato, e comunicazione complicata. Include suggerimenti su come muoversi rispettando la deontologia.</p>
+</div>
+
+<div class="target-block">
+  <div class="target-header">
+    <div class="target-number">3</div>
+    <div class="target-title">Medici, Dentisti, Psicologi, Nutrizionisti, Studi privati</div>
+  </div>
+
+  <h4>Chi sono</h4>
+  <p>Professionisti sanitari con studio privato. Mercato altamente competitivo, soprattutto in odontoiatria e psicologia. Soggetti a vincoli deontologici precisi (Legge 145/2018, codice deontologico, articoli 55-57). Hanno bisogno di nuovi pazienti ma con prudenza estrema sulla forma della comunicazione.</p>
+
+  <h4>I loro 5 problemi principali</h4>
+
+  <div class="problem-card">
+    <div class="problem-title">Mercato iper-saturo, soprattutto nelle grandi citta <span class="problem-frequency">Massima</span></div>
+    <p>Concorrenza schiacciante. A Roma, Milano, Torino, Napoli il rapporto professionisti/abitanti e sbilanciato.</p>
+    <div class="quote">"Sai che il mercato odontoiatrico italiano e super-inflazionato? Nelle grandi citta come Roma o Milano, la concorrenza degli studi dentistici e ormai poco sostenibile. Ecco perche il marketing sanitario non e un'opzione, ma un servizio necessario a sopravvivere."
+      <span class="quote-source">Promozione Medica</span>
+    </div>
+    <div class="quote">"In Italia si contano circa 100.000 professionisti psicologi, quasi un terzo di tutta Europa. Meta di essi sono specializzati in psicoterapia, e vi sono realta locali, come Roma, dove e possibile trovare uno psicologo ogni circa 300 abitanti."
+      <span class="quote-source">Promozione Medica</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Paura di sbagliare la comunicazione e ricevere richiami deontologici <span class="problem-frequency">Alta</span></div>
+    <p>L'Ordine puo segnalare e sanzionare pubblicita non conformi. Questo blocca molti professionisti che preferiscono non fare nulla piuttosto che rischiare.</p>
+    <div class="quote">"Cosa succede se una pagina web o una campagna web di un Medico viene giudicata irregolare? Perche il mio sito o la mia campagna promozionale e stata segnalata? Hai ricevuto un richiamo dal tuo ordine per il tuo sito web o la tua promozione sanitaria?"
+      <span class="quote-source">Promozione Medica</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Affidarsi solo al passaparola fa perdere il 77% dei pazienti potenziali <span class="problem-frequency">Alta</span></div>
+    <p>I pazienti oggi cercano online prima di scegliere uno specialista. Chi non e visibile sul web e fuori dal gioco per la maggior parte dei pazienti.</p>
+    <div class="quote">"Nel mercato sanitario iper-inflazionato di oggi, affidarsi esclusivamente al passaparola equivale a perdere circa il 77% dei potenziali pazienti. Questo perche oltre 3 quarti dei nuovi pazienti ormai trovano il loro Medico specialistico esclusivamente online."
+      <span class="quote-source">Promozione Medica</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Tariffe dei pazienti in calo, redditi che si riducono <span class="problem-frequency">Alta</span></div>
+    <p>Il settore odontoiatrico in particolare soffre il calo del reddito disponibile degli italiani. Molti rimandano cure costose, gli studi devono lavorare di piu per fatturare uguale.</p>
+    <div class="quote">"Il settore odontoiatrico italiano affronta una crisi dovuta a molteplici fattori, l'assenza di un servizio capillare di odontoiatria pubblica, il calo sistematico del reddito medio degli italiani negli ultimi 30 anni, e uno dei redditi procapite piu bassi tra i grandi Paesi europei."
+      <span class="quote-source">Promozione Medica</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Difficolta a comunicare il valore senza usare leve commerciali vietate <span class="problem-frequency">Alta</span></div>
+    <p>Non possono fare leva sul prezzo, sull'offerta scontata, sulle promesse "miracolose". Quindi devono trovare altri modi per emergere, ma non sanno come.</p>
+    <div class="quote">"Qualita clinica non equivale a qualita percepita. Puoi anche essere il miglior professionista in citta, ma devi anche essere bravo a comunicarlo nel modo giusto."
+      <span class="quote-source">Swimme, settembre 2025</span>
+    </div>
+  </div>
+
+  <div class="trigger-box">
+    <strong>I loro trigger di acquisto:</strong>
+    <ul style="margin-top: 8px; padding-left: 22px; color: #d0d0d0;">
+      <li>Apertura di un nuovo studio o seconda sede</li>
+      <li>Inserimento di un nuovo specialista (necessita di farlo conoscere)</li>
+      <li>Calo evidente dei nuovi pazienti rispetto agli anni precedenti</li>
+      <li>Periodo post-estivo o post-natalizio (rientro dei pazienti)</li>
+      <li>Hanno gia ricevuto un richiamo deontologico e cercano una soluzione conforme</li>
+    </ul>
+  </div>
+
+  <h4>Linguaggio tipico</h4>
+  <p><strong>Parole che usano:</strong> "studio", "pazienti", "ambulatorio", "agenda", "prima visita", "deontologia", "Ordine", "etico".</p>
+  <p><strong>Da evitare:</strong> "clienti" (per loro sono pazienti), "vendita", "promozione" (in senso commerciale aggressivo).</p>
+
+  <div class="copy-message">
+    <div class="copy-message-label">Messaggio outbound consigliato</div>
+    <div class="copy-message-text">"Dottore Bianchi, ho guardato il sito del suo studio dentistico. E corretto e professionale, rispetta la deontologia. Ma da un punto di vista pratico non porta nuovi pazienti perche non e ottimizzato per essere trovato dai pazienti che cercano un dentista nella sua zona. Le ho preparato una versione del sito che resta conforme alle norme deontologiche ma e costruita per intercettare le ricerche dei pazienti, senza usare leve commerciali vietate. Glie la mando, e gratis darle un'occhiata."</div>
+  </div>
+</div>
+
+<!-- TARGET 4 -->
+<div class="section-header" id="target4">6, Target 4, Piccole imprese B2B di servizi</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: il quadro delle piccole imprese B2B italiane (IT, HR, logistica, formazione aziendale, servizi alle aziende). Hanno fatturati medi e potenziale di crescita online, ma spesso il digital marketing e l'ultimo dei loro pensieri.</p>
+</div>
+
+<div class="target-block">
+  <div class="target-header">
+    <div class="target-number">4</div>
+    <div class="target-title">Piccole imprese B2B di servizi (IT, HR, logistica, formazione aziendale)</div>
+  </div>
+
+  <h4>Chi sono</h4>
+  <p>Imprese da 3 a 30 dipendenti che vendono servizi ad altre aziende. Fatturati tipici tra 200.000 e 3 milioni di euro. Crescono soprattutto per referral e relazioni commerciali, ma vedono i concorrenti piu giovani superarli sul digitale. Spesso il titolare gestisce direttamente il marketing senza una vera competenza specifica.</p>
+
+  <h4>I loro 5 problemi principali</h4>
+
+  <div class="problem-card">
+    <div class="problem-title">Solo 1 PMI su 5 vende online, il gap digitale e enorme <span class="problem-frequency">Massima</span></div>
+    <p>Il dato di mercato e impressionante. Mentre il mercato e-commerce italiano cresce, l'80% delle PMI resta tagliato fuori.</p>
+    <div class="quote">"Il mercato e-commerce italiano ha raggiunto i 62 miliardi di euro nel 2025, eppure solo il 20,4% delle PMI vende online. Questo paradosso evidenzia un'opportunita enorme per le piccole e medie imprese italiane."
+      <span class="quote-source">DSCom, marzo 2026</span>
+    </div>
+    <div class="quote">"Nonostante oltre il 70% delle PMI dichiari di aver avviato percorsi di digitalizzazione, la trasformazione resta incompiuta e prevalentemente di livello superficiale. Solo il 26,2% delle piccole e medie imprese si colloca a un livello alto di intensita digitale."
+      <span class="quote-source">Osservatorio e-Commerce, novembre 2025</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Marketing visto come "buco nero finanziario" senza misurazione <span class="problem-frequency">Alta</span></div>
+    <p>Spendono in marketing ma non sanno se rende. Senza tracciamento, ogni decisione e una scommessa.</p>
+    <div class="quote">"So che meta dei soldi che spendo in pubblicita e sprecata, il problema e che non so quale meta. Questa celebre frase riflette perfettamente la frustrazione di molti imprenditori italiani che vedono il marketing come un buco nero finanziario."
+      <span class="quote-source">Micciche Fraschilla, aprile 2026</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Spesa media agenzia 800-5.000 euro al mese senza garanzia di risultati <span class="problem-frequency">Alta</span></div>
+    <p>Le fee delle agenzie italiane per PMI sono significative. E pochi misurano il ritorno reale.</p>
+    <div class="quote">"Un'agenzia di marketing in Italia nel 2026 costa mediamente tra 1.500 euro e 15.000 euro al mese, con il 70% delle PMI che spende tra 2.000 e 5.000 euro per servizi multi-canale."
+      <span class="quote-source">Migliore Agenzia, aprile 2026</span>
+    </div>
+    <div class="quote">"L'account senior vende il contratto, il junior lo gestisce. Il profilo con 10 anni di esperienza che presenta il preventivo ha 15 clienti attivi e dedica al vostro account 2 ore al mese. Il resto del lavoro lo fa un collaboratore di 24 anni che ha iniziato sei mesi fa."
+      <span class="quote-source">Bliss Agency, 2026</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">Gestire i social al posto di un sistema strutturato <span class="problem-frequency">Alta</span></div>
+    <p>Molte PMI gestiscono la propria presenza online solo attraverso i social, senza un sito-base efficace.</p>
+    <div class="quote">"Facebook, Instagram e TikTok sono strumenti di comunicazione potenti, ma non sostituiscono un sito web. Eppure migliaia di PMI italiane gestiscono la propria presenza online esclusivamente attraverso i social media. Nessun controllo, le piattaforme social cambiano algoritmi, politiche e condizioni senza preavviso. Una pagina Facebook puo essere sospesa dall'oggi al domani."
+      <span class="quote-source">Targatocn, marzo 2026</span>
+    </div>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-title">CAC (costo acquisizione cliente) non controllato <span class="problem-frequency">Alta</span></div>
+    <p>Spendono per acquisire clienti senza sapere quanto costa davvero. Risultato, margini erosi senza accorgersene.</p>
+    <div class="quote">"Per una PMI, dove ogni euro investito deve pesare come un macigno, il CAC non e un tecnicismo da agenzia di marketing, ma un indicatore di salute vitale per la sopravvivenza stessa del business. Un segnale d'allarme rosso scatta quando il CAC e vicino o superiore al margine lordo della prima vendita."
+      <span class="quote-source">AteneoWeb, marzo 2026</span>
+    </div>
+  </div>
+
+  <div class="trigger-box">
+    <strong>I loro trigger di acquisto:</strong>
+    <ul style="margin-top: 8px; padding-left: 22px; color: #d0d0d0;">
+      <li>Rinnovo del contratto annuale con l'agenzia attuale (momento di rivalutazione)</li>
+      <li>Lancio di un nuovo servizio o linea di prodotti</li>
+      <li>Espansione geografica (nuova sede, nuovo mercato)</li>
+      <li>Cambio del responsabile marketing interno</li>
+      <li>Calo del fatturato che li costringe a rivedere le strategie</li>
+      <li>Hanno appena ricevuto un contributo o un finanziamento e devono investirlo</li>
+    </ul>
+  </div>
+
+  <h4>Linguaggio tipico</h4>
+  <p><strong>Parole che usano:</strong> "fatturato", "clienti", "lead", "preventivi", "contratti", "ritorno sull'investimento", "ROI", "CAC", "team commerciale", "settore", "B2B", "industriale", "fornitori".</p>
+
+  <div class="copy-message">
+    <div class="copy-message-label">Messaggio outbound consigliato</div>
+    <div class="copy-message-text">"[Nome], ho visto il sito di [nome azienda]. E professionale ma e poco piu di un biglietto da visita digitale. Non porta richieste, non ha un sistema di lead generation che lavori 24 ore su 24 al posto del suo team commerciale. Ho ricostruito il sito mantenendo l'identita aziendale ma aggiungendo quello che serve, un percorso che trasforma chi atterra sulla pagina in una richiesta qualificata per il suo team. Inoltre il sistema costa 47 euro al mese (Systeme.io) invece dei 2.000-5.000 euro mensili che state spendendo in agenzia. Le mando il link al nuovo sito gia pronto, decida lei se vale la pena."</div>
+  </div>
+</div>
+
+<!-- SYSTEME.IO -->
+<div class="section-header" id="systeme">7, Analisi Systeme.io, vantaggi e limiti dalla VOC</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: cosa dicono gli utenti reali di Systeme.io. Cosa apprezzano, cosa li frena, quali sono i vantaggi competitivi rispetto ai concorrenti. Materiale fondamentale per costruire la proposta nella strategia outbound.</p>
+</div>
+
+<div class="card">
+<p>Systeme.io ha 5 stelle su Trustpilot con oltre 7.800 recensioni. E una delle piattaforme all-in-one piu apprezzate sul mercato italiano nel rapporto qualita-prezzo. Ma non e perfetta, e capire dove eccelle e dove ha limiti e fondamentale per posizionarla correttamente nei messaggi outbound.</p>
+</div>
+
+<h3>I 7 vantaggi principali (parole degli utenti)</h3>
+
+<div class="problem-card">
+  <div class="problem-title">1. Tutto in un solo strumento</div>
+  <p>Sito, email marketing, funnel, corsi, automazioni, calendario, community, affiliazioni. Una sola piattaforma sostituisce 5-10 strumenti separati.</p>
+  <div class="quote">"Systeme.io si presenta come uno strumento che ti permette di fare tutto su un'unica piattaforma e questo e un vantaggio notevole. In genere si chiamano piattaforme all in one e Systeme e la piu economica (free per chi inizia)."
+    <span class="quote-source">ChefBlog</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">2. Prezzo accessibile</div>
+  <p>Versione gratuita reale e funzionante. Piani a pagamento partono da prezzi molto piu bassi della concorrenza.</p>
+  <div class="quote">"Sto provando Systeme e devo dire che anche la versione gratuita offre funzionalita abbastanza avanzate."
+    <span class="quote-source">Recensione Trustpilot</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">3. Assistenza in italiano</div>
+  <p>Punto raro tra le piattaforme internazionali. Risposte rapide, anche in orari serali.</p>
+  <div class="quote">"L'assistenza italiana e disponibile e fornisce supporto in tempi abbastanza rapidi. Ho sempre avuto assistenza e risposta in poche ore (in genere nel gruppo risposta in pochi minuti) a volte anche alle 10 di sera ed avere un'assistenza in italiano ha un valore immenso."
+    <span class="quote-source">ChefBlog e Trustpilot</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">4. Email illimitate anche nel piano gratuito</div>
+  <p>Caratteristica rara. Altri tool fanno pagare in base al numero di contatti o di email inviate.</p>
+  <div class="quote">"Systeme io ti permette di inviare email illimitate, creare sequenze automatizzate e segmentare i contatti. Non hai limiti di invio nemmeno nel piano gratuito, una cosa rara tra le piattaforme simili."
+    <span class="quote-source">Studio Campisi, febbraio 2026</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">5. Interfaccia intuitiva, facile da usare</div>
+  <p>Editor drag-and-drop per pagine e funnel. Curva di apprendimento bassa.</p>
+  <div class="quote">"In primo luogo, l'interfaccia e molto intuitiva. Inoltre, anche nella versione gratuita, la piattaforma permette di fare tantissime cose, sito, email marketing, gestione dei contatti."
+    <span class="quote-source">Unidevs, settembre 2025</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">6. Migliori tassi di apertura email rispetto ad altre piattaforme</div>
+  <p>Aspetto tecnico che fa la differenza nei numeri reali.</p>
+  <div class="quote">"Col passaggio a Systeme ho avuto un netto miglioramento del tasso di apertura delle email, e su migliaia di contatti anche solo un 5% in piu e oro."
+    <span class="quote-source">ChefBlog</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">7. Migrazione gratuita da altre piattaforme</div>
+  <p>Servizio offerto al passaggio dai concorrenti. Riduce attrito per chi e gia su altre piattaforme.</p>
+  <div class="quote">"Price point, customer service and value for the money. The amount of products you get for the money is really what lead me to give Systeme.io a try. Also the free migration (which went smoothly) was a bonus."
+    <span class="quote-source">Recensione Capterra</span>
+  </div>
+</div>
+
+<h3>I limiti reali di Systeme.io (essere onesti aiuta la vendita)</h3>
+
+<div class="problem-card">
+  <div class="problem-title">Limite 1, Design meno personalizzabile rispetto a ClickFunnels</div>
+  <p>Le opzioni di personalizzazione delle landing page sono piu limitate di altre piattaforme premium.</p>
+  <div class="quote">"Design Limitato, le opzioni di personalizzazione delle landing page sono meno avanzate rispetto a piattaforme come ClickFunnels."
+    <span class="quote-source">Cashxflow, giugno 2025</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">Limite 2, Integrazioni esterne limitate</div>
+  <p>Non si integra con tutti gli strumenti di terze parti.</p>
+  <div class="quote">"Non ha integrazione con strumenti e servizi esterni come per esempio Zapier nativo evoluto. Per usi avanzati questo puo essere un limite."
+    <span class="quote-source">Lorenzo Gnesutta</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">Limite 3, Non e WordPress, meno flessibilita di design</div>
+  <p>Per chi ha bisogno di personalizzazioni estreme a livello di codice.</p>
+  <div class="quote">"Non e WordPress e quindi c'e ovviamente un limite alla flessibilita di progettazione offerta."
+    <span class="quote-source">Lorenzo Gnesutta</span>
+  </div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-title">Limite 4, E-commerce avanzato non supportato</div>
+  <p>Per chi ha negozi complessi con migliaia di prodotti, varianti, gestione magazzino, meglio Shopify o WooCommerce.</p>
+  <div class="quote">"Mancanza di Funzionalita di E-commerce Avanzate, se cerchi una piattaforma per un negozio online complesso, potrebbe non essere la scelta migliore."
+    <span class="quote-source">Cashxflow</span>
+  </div>
+</div>
+
+<div class="card">
+<p><strong>Insight strategico:</strong> i limiti di Systeme.io sono perfetti per il nostro posizionamento. Non e per chi vuole personalizzazioni estreme o e-commerce complessi. E per chi vuole un sistema completo che funziona, semplice, italiano, economico. E quello che la maggior parte del nostro target ha bisogno. Non vendere Systeme a chi non e in target.</p>
+</div>
+
+<!-- CONFRONTO -->
+<div class="section-header" id="confronto">8, Confronto Systeme.io vs concorrenti</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: il confronto tra Systeme.io e le alternative che il target ha gia provato o sta valutando. WordPress (il fai da te tecnico), agenzie tradizionali (il "pago e dimentico"), Wix (il fai da te facile), ClickFunnels (il premium americano). Capire dove i concorrenti falliscono e capire dove Systeme.io vince.</p>
+</div>
+
+<h3>Systeme.io vs WordPress</h3>
+
+<table>
+<tr>
+  <th style="width: 28%;">Aspetto</th>
+  <th style="width: 36%;">WordPress</th>
+  <th style="width: 36%;">Systeme.io</th>
+</tr>
+<tr>
+  <td><strong>Costo annuale reale</strong></td>
+  <td>Hosting (50-200 euro/mese), plugin premium (300-800 euro/anno), manutenzione (100-300 euro/mese se agenzia). Totale realistico, 2.500-7.000 euro/anno.</td>
+  <td>Piano gratuito o piani a pagamento da 27 a 97 euro al mese. Totale realistico, 0-1.200 euro/anno.</td>
+</tr>
+<tr>
+  <td><strong>Manutenzione</strong></td>
+  <td>Aggiornamenti continui di plugin, temi, core, PHP. Conflitti frequenti.</td>
+  <td>Nessuna manutenzione tecnica richiesta. La piattaforma si aggiorna da sola.</td>
+</tr>
+<tr>
+  <td><strong>Velocita del sito</strong></td>
+  <td>Spesso lento. Richiede ottimizzazioni costanti, plugin di cache, hosting performante.</td>
+  <td>Veloce di base, ottimizzato a livello di piattaforma.</td>
+</tr>
+<tr>
+  <td><strong>Sicurezza</strong></td>
+  <td>Vulnerabile, soprattutto se non aggiornato. Plugin di sicurezza necessari.</td>
+  <td>Gestita centralmente dalla piattaforma.</td>
+</tr>
+<tr>
+  <td><strong>Integrazione marketing</strong></td>
+  <td>Servono plugin separati per email marketing, funnel, automazioni. Ognuno ha costi e configurazioni.</td>
+  <td>Tutto integrato nativamente, email, funnel, automazioni, corsi, CRM.</td>
+</tr>
+<tr>
+  <td><strong>Per chi e</strong></td>
+  <td>Chi ha competenze tecniche o un budget per gestione professionale continuativa.</td>
+  <td>Professionisti e piccole imprese che vogliono concentrarsi sul business, non sul sito.</td>
+</tr>
+</table>
+
+<div class="quote">"WordPress e gratuito. E la parte che viene comunicata. Quello che non viene comunicato e il costo reale dello stack professionale su 3 anni. Hosting dedicato 1.800-7.200 euro su 3 anni. Plugin premium 900-2.400 euro su 3 anni. Manutenzione mensile 3.600-10.800 euro su 3 anni."
+  <span class="quote-source">Keidea CMS, maggio 2026</span>
+</div>
+
+<h3>Systeme.io vs Agenzie tradizionali</h3>
+
+<table>
+<tr>
+  <th style="width: 28%;">Aspetto</th>
+  <th style="width: 36%;">Agenzia tradizionale</th>
+  <th style="width: 36%;">Systeme.io + nostro supporto</th>
+</tr>
+<tr>
+  <td><strong>Costo mensile</strong></td>
+  <td>800-5.000 euro fee + 1.000-5.000 euro budget media = 1.800-10.000 euro al mese.</td>
+  <td>27-97 euro/mese per la piattaforma + setup una tantum + budget media diretto.</td>
+</tr>
+<tr>
+  <td><strong>Trasparenza</strong></td>
+  <td>Spesso bassa. Account senior vende, junior gestisce. Poche ore reali dedicate.</td>
+  <td>Hai tu il controllo totale, vedi i numeri in tempo reale dalla dashboard.</td>
+</tr>
+<tr>
+  <td><strong>Dipendenza</strong></td>
+  <td>Totale. Senza l'agenzia il sito si ferma.</td>
+  <td>Zero. Il sistema funziona anche senza interventi continui.</td>
+</tr>
+<tr>
+  <td><strong>Tempo per vedere risultati</strong></td>
+  <td>6-12 mesi minimo dichiarato.</td>
+  <td>Funnel attivi gia dal primo mese.</td>
+</tr>
+<tr>
+  <td><strong>Misurazione</strong></td>
+  <td>Report mensili a volte, spesso con vanity metrics (like, impression).</td>
+  <td>Numeri concreti, contatti, conversioni, fatturato generato.</td>
+</tr>
+</table>
+
+<h3>Systeme.io vs Wix, Squarespace, builder generici</h3>
+
+<table>
+<tr>
+  <th style="width: 28%;">Aspetto</th>
+  <th style="width: 36%;">Wix, Squarespace</th>
+  <th style="width: 36%;">Systeme.io</th>
+</tr>
+<tr>
+  <td><strong>Focus</strong></td>
+  <td>Costruire siti vetrina belli.</td>
+  <td>Costruire sistemi di marketing che generano clienti.</td>
+</tr>
+<tr>
+  <td><strong>Funnel e automazioni</strong></td>
+  <td>Limitate o assenti. Servono integrazioni esterne.</td>
+  <td>Native e illimitate anche nel piano base.</td>
+</tr>
+<tr>
+  <td><strong>Email marketing</strong></td>
+  <td>Limitato. Conviene Mailchimp/ActiveCampaign separati (costo aggiuntivo).</td>
+  <td>Email illimitate gia incluse.</td>
+</tr>
+<tr>
+  <td><strong>Strategia</strong></td>
+  <td>Nessuna. La piattaforma da gli strumenti, ma il "come usarli" e affare tuo.</td>
+  <td>Con il nostro supporto, ti diamo template gia ottimizzati per la tua nicchia.</td>
+</tr>
+</table>
+
+<h3>Systeme.io vs ClickFunnels</h3>
+
+<table>
+<tr>
+  <th style="width: 28%;">Aspetto</th>
+  <th style="width: 36%;">ClickFunnels</th>
+  <th style="width: 36%;">Systeme.io</th>
+</tr>
+<tr>
+  <td><strong>Prezzo</strong></td>
+  <td>147 dollari/mese, 197 dollari/mese, 297 dollari/mese.</td>
+  <td>0 euro, 27 euro, 47 euro, 97 euro/mese.</td>
+</tr>
+<tr>
+  <td><strong>Lingua</strong></td>
+  <td>Solo inglese.</td>
+  <td>Interfaccia e assistenza in italiano.</td>
+</tr>
+<tr>
+  <td><strong>Personalizzazione design</strong></td>
+  <td>Piu avanzata.</td>
+  <td>Piu semplice ma sufficiente per il 90% dei casi.</td>
+</tr>
+<tr>
+  <td><strong>Curva di apprendimento</strong></td>
+  <td>Alta.</td>
+  <td>Bassa.</td>
+</tr>
+</table>
+
+<!-- INSIGHT -->
+<div class="section-header" id="insight">9, Insight strategici per la strategia outbound</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: 10 insight strategici che emergono dalla VOC e che servono a costruire i messaggi outbound vincenti. Sono le "leve" su cui premere nella comunicazione.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 1, La parola "agenzia" e tossica per buona parte del target</div>
+  <p>Chi ha gia avuto esperienze negative con agenzie ha sviluppato anticorpi. Posizionarsi come "non-agenzia" o come "alternativa all'agenzia" e piu efficace che dire "siamo un'agenzia migliore". Usa parole come "supporto", "sistema", "metodo", "assistenza", evita "agenzia" e "gestione marketing".</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 2, Il sito rifatto e gia pronto e un'esca potentissima</div>
+  <p>Mandare un messaggio outbound dicendo "ti faccio uno sconto" o "ti faccio un'analisi gratuita" non funziona piu. Mandare "ho gia rifatto il tuo sito, guarda qui" e radicalmente diverso. Mostra impegno, competenza, e da subito un risultato tangibile da valutare. La curiosita di vedere come potrebbe essere il proprio sito vince sulla diffidenza.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 3, Il prezzo basso di Systeme.io e un'arma a doppio taglio</div>
+  <p>Da una parte e un argomento vincente (47 euro al mese contro 2.000 euro di agenzia). Dall'altra rischia di svalutare la proposta. La leva non e "costa meno", ma "ti da il controllo". Posiziona il prezzo come effetto collaterale del fatto che il sistema lavora per te in autonomia, non come argomento principale.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 4, "Strategia" e la parola magica per i target B2B</div>
+  <p>Tutti gli intervistati ripetono che manca la strategia. Loro hanno gli strumenti, ma non sanno come usarli. La nostra proposta deve includere sempre il piano strategico ("ecco cosa fa il sito, ecco come trasforma chi visita in cliente"), non solo lo strumento. Senza strategia il messaggio cade.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 5, La velocita e il "vedere subito" e fondamentale</div>
+  <p>Il target ha pochissima pazienza per processi che richiedono mesi. Le agenzie dicono "6-12 mesi per i risultati". Il nostro outbound deve dire "il nuovo sito e gia online, lo vedi adesso, decidi tu se ti piace". Tempo reale, non promesso.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 6, Personalizzare il messaggio per nicchia raddoppia la conversione</div>
+  <p>Un messaggio generico "ti rifacciamo il sito" e mediocre. Un messaggio specifico "ho rifatto il sito del tuo studio di architettura tenendo intatto lo stile minimalista ma aggiungendo SEO e form di contatto qualificato" funziona infinitamente di piu. Il target sente che capisci il suo mondo.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 7, Non vendere Systeme.io subito, mostralo come conseguenza</div>
+  <p>Il prospect non deve sentirsi "venduto" Systeme.io. Deve sentire che il problema (sito che non porta clienti) viene risolto dal sistema (sito ricostruito + funnel + email), e che il sistema gira su una piattaforma (Systeme.io) che e parte della soluzione. L'ordine conta. Prima il risultato, poi lo strumento.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 8, Per medici e architetti, "deontologia" e una leva fondamentale</div>
+  <p>Per i professionisti con codici deontologici (medici, avvocati, commercialisti, architetti), tranquillizzarli sul fatto che la nuova proposta rispetta le norme della loro categoria e potentissimo. Molti hanno paura di muoversi proprio per questo.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 9, Il fattore "tempo del titolare" e sottovalutato</div>
+  <p>Il target spesso non si rende conto di quanto gli costa gestire personalmente il sito o i social. Quantificarglielo ("se passi 5 ore a settimana sul sito, sono 250 euro al mese del tuo tempo perso") sblocca decisioni che rimandavano da mesi.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Insight 10, Il messaggio outbound deve essere corto e diretto</div>
+  <p>I professionisti italiani sono inondati di messaggi commerciali. Quelli lunghi vengono ignorati. Il nostro messaggio deve dire in 3 frasi, ho guardato il tuo sito, ho notato questo problema, ti ho gia preparato la soluzione, ecco il link. Tutto il resto viene dopo, quando rispondono.</p>
+</div>
+
+<!-- OUTBOUND FRAMEWORK -->
+<div class="section-header" id="outbound">10, Framework messaggi outbound</div>
+<div class="intro-box">
+  <p>Cosa contiene questa sezione: lo schema base del messaggio outbound, le 3 variazioni per email, LinkedIn e telefono, e i punti chiave per personalizzarlo a ogni prospect.</p>
+</div>
+
+<h3>Schema base del messaggio outbound</h3>
+
+<div class="card">
+<p>Il messaggio outbound segue una struttura precisa che parte dai dati VOC raccolti. Ogni elemento ha uno scopo.</p>
+
+<ol style="padding-left: 22px; color: #d0d0d0; line-height: 2;">
+  <li><strong style="color: #f0b41a;">Apertura personalizzata (1 frase)</strong>, nome + categoria specifica. "Architetto Rossi, ho dato un'occhiata al sito del tuo studio".</li>
+  <li><strong style="color: #f0b41a;">Riconoscimento del valore (1 frase)</strong>, qualcosa di positivo per non sembrare aggressivi. "Si vede la qualita del lavoro che fate".</li>
+  <li><strong style="color: #f0b41a;">Il problema specifico per la nicchia (1 frase)</strong>, pescato dalla VOC del target. "Pero da un punto di vista pratico non porta nuovi clienti perche [problema specifico]".</li>
+  <li><strong style="color: #f0b41a;">La soluzione gia pronta (1 frase)</strong>, l'esca della strategia outbound. "Ti ho gia rifatto una versione del sito che [risolve il problema]".</li>
+  <li><strong style="color: #f0b41a;">Chiusura senza pressione (1 frase)</strong>, abbassa l'attrito. "Te la mando qui, decidi tu se serve". O "Vuoi che te la mandi?".</li>
+</ol>
+</div>
+
+<h3>Versione email (testo completo)</h3>
+
+<div class="card">
+<p style="font-style: italic; color: #c0c0c0; background: #0a0a0a; padding: 18px; border-radius: 4px; border-left: 3px solid #f0b41a;">
+Oggetto, Ho gia rifatto il sito dello studio<br><br>
+
+Architetto Rossi,<br><br>
+
+Ho dato un'occhiata al sito di [nome studio]. Esteticamente e curato, si vede la qualita dei progetti.<br><br>
+
+Ma c'e un problema pratico, su Google nessuno trova il sito quando cerca [tipo di servizio] nella zona di [citta]. Ho controllato, l'indicizzazione e fatta male. Risultato, il sito non porta clienti, e una vetrina chiusa.<br><br>
+
+Ho preso il vostro stile e ho ricostruito il sito tenendo intatta l'estetica ma aggiungendo quello che serve per essere trovati dai clienti che cercano architetti come voi.<br><br>
+
+E gia online. Le mando il link qui, [LINK].<br><br>
+
+Lo guardi con calma, se le piace ne parliamo, se non le piace ha solo perso 5 minuti.<br><br>
+
+[Nome]
+</p>
+</div>
+
+<h3>Versione LinkedIn (piu corta)</h3>
+
+<div class="card">
+<p style="font-style: italic; color: #c0c0c0; background: #0a0a0a; padding: 18px; border-radius: 4px; border-left: 3px solid #f0b41a;">
+Ciao [Nome], ho guardato il sito di [azienda]. Si vede il valore del lavoro che fate, ma il sito non porta clienti. Ho gia ricostruito una versione che potrebbe portarli, posso mandarti il link?
+</p>
+</div>
+
+<h3>Versione telefono (script)</h3>
+
+<div class="card">
+<p style="font-style: italic; color: #c0c0c0; background: #0a0a0a; padding: 18px; border-radius: 4px; border-left: 3px solid #f0b41a;">
+"Buongiorno [Nome], sono [il tuo nome]. La chiamo perche ho guardato il sito di [azienda] e ho notato una cosa, e curato esteticamente ma non porta clienti. Ho gia ricostruito una versione che potrebbe portarli, sono 2 minuti di consultazione, se le interessa le mando il link, se non le interessa la lascio in pace. Le va che le mandi il link?"
+</p>
+</div>
+
+<h3>Le 5 cose da NON fare nei messaggi outbound</h3>
+
+<table>
+<tr>
+  <th>Errore da evitare</th>
+  <th>Perche</th>
+</tr>
+<tr>
+  <td>Iniziare con "Buongiorno, mi chiamo X e sono..."</td>
+  <td>Suona da venditore. Salta direttamente al loro problema.</td>
+</tr>
+<tr>
+  <td>Promettere "aumento del 200% dei clienti"</td>
+  <td>Hanno gia sentito promesse simili. Diventa rumore di fondo.</td>
+</tr>
+<tr>
+  <td>Parlare di noi (chi siamo, cosa facciamo)</td>
+  <td>Non gli interessa. Gli interessa solo se possiamo risolvergli un problema.</td>
+</tr>
+<tr>
+  <td>Usare gergo tecnico (funnel, lead, conversion rate)</td>
+  <td>Buona parte del target non capisce o si sente intimidito.</td>
+</tr>
+<tr>
+  <td>Mettere link che chiedono di compilare moduli per "vedere"</td>
+  <td>Mostra il link diretto. Zero attrito, zero richieste prima del vedere.</td>
+</tr>
+</table>
+
+<div class="card" style="margin-top: 40px;">
+  <div class="card-title">Prossimi passi consigliati</div>
+  <p>Con questa analisi VOC come base, i passi successivi della strategia outbound sono:</p>
+  <ol style="padding-left: 22px; color: #d0d0d0; line-height: 2;">
+    <li>Costruire una lista di prospect per categoria (50 architetti, 50 medici privati, 50 PMI B2B, 50 consulenti)</li>
+    <li>Per ogni prospect, analizzare il sito attuale e identificare il problema specifico</li>
+    <li>Rifare il sito con le skill Claude (page-builder, funnel-migration-tool, funnel-landing-copy)</li>
+    <li>Preparare un breve report strategico con bentivoglio-consulting-report</li>
+    <li>Inviare il messaggio outbound (email o LinkedIn) usando i template di questo report</li>
+    <li>Tracciare risposte, conversioni, e affinare il messaggio iterando</li>
+  </ol>
+</div>
+
+</div>
+
+<footer class="bc-footer">
+  <p>Preparato secondo il <strong>Metodo Bentivoglio</strong> da <strong>Bentivoglio Consulting</strong></p>
+  <p>&copy; 2026 Bentivoglio Consulting, Tutti i diritti riservati</p>
+  <p style="font-size: 0.75rem; color: #666;">Report generato con Analisi VOC Multi-Target v1.0, in data 17/05/2026, 09:30</p>
+  <p style="font-size: 0.75rem; color: #666;">Fonte dati, Ricerca VOC web (90+ fonti consultate)</p>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+<script>
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const offset = 80;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({top: top, behavior: 'smooth'});
+  }
+}
+
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('scrollTop');
+  if (window.pageYOffset > 400) {
+    btn.classList.add('show');
+  } else {
+    btn.classList.remove('show');
+  }
+
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.sticky-nav a');
+  let current = '';
+  sections.forEach(s => {
+    const top = s.getBoundingClientRect().top;
+    if (top < 200) current = s.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('onclick') && link.getAttribute('onclick').includes("'" + current + "'")) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
