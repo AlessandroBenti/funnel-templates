@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alessandro Bentivoglio, L'Imprenditore dei Numeri</title>
+<meta name="description" content="Costruisci il tuo Sistema di Marketing e Vendite partendo dalla Strategia. 4x 2 Comma Club, +100M€ generati. Inizia da qui.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0c0c0c;
+    --black-soft: #161616;
+    --gold: #f0b41a;
+    --gold-soft: rgba(240, 180, 26, 0.15);
+    --white: #ffffff;
+    --gray: #8a8a8a;
+    --gray-light: #e8e8e8;
+    --line: #2a2a2a;
+    --max-width: 1200px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 32px; }
+  ::selection { background: var(--gold); color: var(--black); }
+  img { max-width: 100%; height: auto; display: block; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: rgba(12, 12, 12, 0.85);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .nav-logo img { height: 36px; }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { color: var(--gray-light); text-decoration: none; font-weight: 500; font-size: 14px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--black) !important;
+    padding: 10px 22px; border-radius: 6px; font-weight: 700;
+  }
+  .nav-cta:hover { background: var(--white); }
+  .nav-flag img { height: 22px; opacity: 0.7; transition: opacity 0.2s; }
+  .nav-flag:hover img { opacity: 1; }
+  @media (max-width: 900px) { .nav-links a:not(.nav-cta):not(.nav-flag) { display: none; } }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh; padding: 130px 0 60px;
+    display: flex; align-items: center;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(240,180,26,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(240,180,26,0.05) 0%, transparent 50%),
+      var(--black);
+    position: relative;
+  }
+  .hero::after {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 2; text-align: center; max-width: 1000px; margin: 0 auto; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; background: var(--gold-soft);
+    border: 1px solid var(--gold); border-radius: 100px;
+    font-size: 12px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.05; font-weight: 900;
+    letter-spacing: -2px; margin-bottom: 24px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  h1 .accent { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--gray-light);
+    max-width: 720px; margin: 0 auto 40px;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+  .hero-sub strong { color: var(--gold); font-weight: 700; }
+  .cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.8s ease 0.4s both; }
+  .btn {
+    padding: 17px 30px; border-radius: 8px; font-weight: 700;
+    font-size: 14px; text-decoration: none; display: inline-flex;
+    align-items: center; gap: 10px; transition: all 0.3s;
+    cursor: pointer; border: none; font-family: inherit;
+    line-height: 1.3; text-align: center; flex-direction: column;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--black);
+    box-shadow: 0 8px 30px rgba(240,180,26,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(240,180,26,0.45); }
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    border: 1.5px solid var(--gray); padding: 15.5px 28.5px;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+  .btn small { display: block; font-size: 11px; font-weight: 500; opacity: 0.75; letter-spacing: 0.5px; margin-top: 4px; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* START HERE (NUOVA SEZIONE) */
+  .start-here {
+    background: rgba(240, 180, 26, 0.04);
+    border-top: 1px solid var(--gold-soft);
+    border-bottom: 1px solid var(--gold-soft);
+    padding: 32px 0;
+  }
+  .start-here-grid {
+    display: grid; grid-template-columns: auto 1fr auto;
+    align-items: center; gap: 32px; max-width: 1000px; margin: 0 auto;
+  }
+  .start-here-icon {
+    width: 56px; height: 56px; background: var(--gold);
+    border-radius: 12px; display: flex; align-items: center;
+    justify-content: center; color: var(--black); font-size: 28px;
+    font-weight: 900;
+  }
+  .start-here-text { color: var(--gray-light); font-size: 1rem; }
+  .start-here-text strong { color: var(--gold); font-weight: 700; }
+  .start-here .btn { padding: 14px 24px; font-size: 13px; flex-direction: row; }
+  @media (max-width: 768px) {
+    .start-here-grid { grid-template-columns: 1fr; text-align: center; gap: 16px; }
+  }
+
+  /* QUICK PATH (3 percorsi, NUOVA SEZIONE) */
+  .quick-path { padding: 100px 0 60px; }
+  .quick-path-header { text-align: center; max-width: 700px; margin: 0 auto 56px; }
+  .section-eyebrow {
+    font-size: 13px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1; font-weight: 800;
+    margin-bottom: 24px; letter-spacing: -1.5px;
+  }
+  h2 .accent { color: var(--gold); font-style: italic; }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.65rem; font-weight: 700; margin-bottom: 12px;
+  }
+  .paths-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .path-card {
+    padding: 36px 28px; background: var(--black-soft);
+    border: 1px solid var(--line); border-radius: 16px;
+    text-decoration: none; color: inherit; display: block;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .path-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--gold); transform: scaleX(0);
+    transition: transform 0.3s; transform-origin: left;
+  }
+  .path-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .path-card:hover::before { transform: scaleX(1); }
+  .path-num {
+    color: var(--gold); font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900; line-height: 1; margin-bottom: 16px;
+  }
+  .path-card p { color: var(--gray-light); font-size: 0.95rem; margin-bottom: 16px; }
+  .path-card .path-cta { color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+  .path-card .path-cta::after { content: ' →'; }
+  .path-tag {
+    display: inline-block; padding: 4px 10px;
+    background: var(--gold-soft); color: var(--gold);
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; border-radius: 4px; margin-bottom: 16px;
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 0; position: relative; }
+
+  /* HERO IMG */
+  .hero-img-section { padding: 0 0 40px; text-align: center; }
+  .hero-img-section img { max-width: 600px; margin: 0 auto; border-radius: 16px; }
+
+  /* SUBHEAD */
+  .subhead {
+    text-align: center; padding: 60px 32px;
+    max-width: 900px; margin: 0 auto;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    line-height: 1.4; color: var(--gray-light);
+    font-weight: 500;
+  }
+  .subhead strong { color: var(--gold); font-weight: 700; }
+
+  /* STRATEGY */
+  .strategy { background: var(--black-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .strategy-header { text-align: center; margin-bottom: 56px; }
+  .strategy-content { max-width: 800px; margin: 0 auto; }
+  .strategy-content p { font-size: 1.05rem; color: var(--gray-light); margin-bottom: 22px; }
+  .strategy-content p strong { color: var(--white); font-weight: 700; }
+  .strategy-content p em { color: var(--gold); font-style: italic; font-weight: 600; }
+
+  /* BENEFITS */
+  .benefits-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; margin-top: 64px;
+  }
+  .benefit-card {
+    padding: 36px 28px; background: var(--black-soft);
+    border: 1px solid var(--line); border-radius: 16px;
+    transition: all 0.3s; text-align: center;
+  }
+  .benefit-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .benefit-card img { width: 48px; height: 48px; margin: 0 auto 20px; filter: brightness(1.1); }
+
+  /* EBOOK CTA (NUOVA SEZIONE) */
+  .ebook-cta {
+    background: linear-gradient(135deg, var(--black-soft) 0%, var(--black) 100%);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 80px 0;
+  }
+  .ebook-grid {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px;
+    align-items: center; max-width: 1100px; margin: 0 auto;
+  }
+  .ebook-cover {
+    aspect-ratio: 3/4; max-width: 320px; margin: 0 auto;
+    background: linear-gradient(135deg, var(--gold) 0%, #c8941a 100%);
+    border-radius: 12px; padding: 40px 32px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: 0 20px 60px rgba(240,180,26,0.25);
+    color: var(--black); position: relative;
+  }
+  .ebook-cover::before {
+    content: ''; position: absolute; top: 24px; right: 24px;
+    width: 12px; height: 12px; background: var(--black); border-radius: 50%;
+  }
+  .ebook-cover-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; opacity: 0.6;
+  }
+  .ebook-cover-title {
+    font-family: 'Playfair Display', serif; font-size: 1.8rem;
+    line-height: 1.1; font-weight: 900;
+  }
+  .ebook-cover-author {
+    font-size: 13px; font-weight: 600; opacity: 0.7;
+    border-top: 2px solid var(--black); padding-top: 12px;
+  }
+  .ebook-content h2 { font-size: 2.5rem; margin-bottom: 16px; }
+  .ebook-content p { color: var(--gray-light); margin-bottom: 16px; }
+  .ebook-content ul { list-style: none; margin: 24px 0; }
+  .ebook-content li {
+    padding: 8px 0; color: var(--gray-light);
+    display: flex; align-items: start; gap: 12px;
+  }
+  .ebook-content li::before {
+    content: '✓'; color: var(--gold); font-weight: 900;
+    flex-shrink: 0;
+  }
+  @media (max-width: 900px) {
+    .ebook-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* QUOTE */
+  .quote-section { text-align: center; padding: 100px 0; }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-style: italic; line-height: 1.4;
+    max-width: 900px; margin: 0 auto 32px;
+  }
+  .quote-text .accent { color: var(--gold); font-style: normal; font-weight: 700; }
+  .quote-author { color: var(--gold); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 13px; }
+
+  /* ABOUT */
+  .about { background: var(--black-soft); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .about-photo {
+    width: 100%; border-radius: 24px; overflow: hidden;
+    background: var(--gold-soft);
+  }
+  .about-photo img { width: 100%; height: auto; display: block; }
+  .about-content .badges {
+    display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap;
+  }
+  .badge {
+    padding: 8px 16px; border: 1px solid var(--gold);
+    color: var(--gold); border-radius: 100px;
+    font-size: 12px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .about-text { color: var(--gray-light); font-size: 1.02rem; margin-bottom: 18px; }
+  .about-text strong { color: var(--white); font-weight: 700; }
+  .about-text em { color: var(--gold); font-style: italic; font-weight: 600; }
+  .awards-img { margin-top: 24px; max-width: 280px; }
+  @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  /* PROGRAMS */
+  .programs-list { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+  .program-item {
+    padding: 22px 24px; background: var(--black);
+    border: 1px solid var(--line); border-left: 4px solid var(--gold);
+    border-radius: 8px; transition: all 0.3s;
+  }
+  .program-item:hover { border-left-width: 8px; padding-left: 28px; }
+  .program-item strong { color: var(--gold); font-weight: 700; }
+
+  /* CLIENTS */
+  .clients-section { padding: 80px 0; text-align: center; }
+  .clients-label { color: var(--gray); margin-bottom: 40px; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+  .clients-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px; max-width: 900px; margin: 0 auto;
+    align-items: center;
+  }
+  .clients-grid img {
+    max-height: 80px; width: auto; margin: 0 auto;
+    filter: grayscale(100%) brightness(1.2); opacity: 0.7;
+    transition: all 0.3s;
+  }
+  .clients-grid img:hover { filter: grayscale(0%) brightness(1); opacity: 1; }
+
+  /* PLANNING */
+  .planning {
+    background: linear-gradient(135deg, var(--black-soft) 0%, var(--black) 100%);
+    text-align: center;
+  }
+  .planning-content { max-width: 850px; margin: 0 auto; }
+  .planning-content p { color: var(--gray-light); font-size: 1.05rem; margin-bottom: 22px; }
+  .planning-content p strong { color: var(--white); font-weight: 700; }
+  .planning-quote {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.5rem; color: var(--gold); margin: 32px 0;
+  }
+  .planning-quote small { color: var(--gray); font-size: 0.7em; font-style: normal; display: block; margin-top: 8px; }
+  .reasons {
+    text-align: left; max-width: 700px;
+    margin: 48px auto; display: grid; gap: 24px;
+  }
+  .reason {
+    padding: 24px 28px; background: var(--black);
+    border-left: 3px solid var(--gold); border-radius: 8px;
+  }
+  .reason-number {
+    color: var(--gold); font-weight: 900;
+    font-family: 'Playfair Display', serif; font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .reason-text { color: var(--gray-light); }
+  .reason-text strong { color: var(--white); }
+
+  /* TESTIMONIALS */
+  .testimonials-header { text-align: center; max-width: 800px; margin: 0 auto 32px; }
+  .testimonials-header p { color: var(--gray-light); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px; margin-top: 56px;
+  }
+  .testimonial {
+    padding: 32px 26px; background: var(--black-soft);
+    border: 1px solid var(--line); border-radius: 16px;
+  }
+  .testimonial-photo {
+    width: 56px; height: 56px; border-radius: 50%;
+    overflow: hidden; margin-bottom: 16px;
+    border: 2px solid var(--gold);
+  }
+  .testimonial-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .testimonial-text {
+    font-style: italic; color: var(--gray-light);
+    margin: 16px 0 20px; font-size: 0.95rem; line-height: 1.6;
+  }
+  .testimonial-author { border-top: 1px solid var(--line); padding-top: 18px; }
+  .testimonial-name { font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  .testimonial-role { font-size: 13px; color: var(--gold); }
+
+  /* FUNNEL SYSTEM */
+  .funnel-system {
+    background: var(--gold); color: var(--black);
+    text-align: center; padding: 100px 0;
+    position: relative; overflow: hidden;
+  }
+  .funnel-system h2 { color: var(--black); margin-bottom: 16px; font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
+  .funnel-system h2 .accent { color: var(--black); text-decoration: underline; text-decoration-thickness: 3px; font-style: italic; }
+  .funnel-system .sparkle { font-size: 1.5em; }
+  .funnel-system-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .funnel-system-content { text-align: left; }
+  .funnel-system-content p { color: var(--black); font-size: 1.05rem; margin: 0 auto 24px; opacity: 0.85; }
+  .funnel-system-content .btn-primary { background: var(--black); color: var(--gold); box-shadow: none; flex-direction: column; }
+  .funnel-system-content .btn-primary:hover { background: var(--white); color: var(--black); transform: translateY(-2px); }
+  .funnel-mockup-img { max-width: 100%; border-radius: 12px; }
+  @media (max-width: 900px) {
+    .funnel-system-grid { grid-template-columns: 1fr; gap: 32px; }
+    .funnel-system-content { text-align: center; }
+  }
+
+  /* CONSULTATION (NUOVA SEZIONE FINALE) */
+  .consultation {
+    background: var(--black);
+    text-align: center;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(240,180,26,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 50%, rgba(240,180,26,0.05) 0%, transparent 40%);
+  }
+  .consultation-content { max-width: 750px; margin: 0 auto; }
+  .consultation-content p { color: var(--gray-light); font-size: 1.1rem; margin-bottom: 32px; }
+  .consult-features {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px; margin: 40px 0;
+  }
+  .consult-feature {
+    padding: 18px; background: var(--black-soft);
+    border: 1px solid var(--line); border-radius: 8px;
+    color: var(--gray-light); font-size: 0.95rem;
+  }
+  .consult-feature strong { color: var(--gold); display: block; margin-bottom: 4px; font-size: 1.1rem; }
+
+  /* FOOTER */
+  footer { padding: 64px 0 32px; border-top: 1px solid var(--line); background: var(--black-soft); }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+  .footer-logo img { height: 40px; margin-bottom: 16px; }
+  .footer-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; font-weight: 700; }
+  .footer-col a { display: block; color: var(--gray-light); text-decoration: none; padding: 6px 0; font-size: 14px; }
+  .footer-col a:hover { color: var(--gold); }
+  .footer-bio { color: var(--gray); font-size: 14px; max-width: 320px; }
+  .footer-bottom {
+    border-top: 1px solid var(--line); padding-top: 24px;
+    text-align: center; color: var(--gray); font-size: 13px;
+  }
+  .footer-bottom a { color: var(--gray); text-decoration: underline; }
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/656b988702bab_AB-logo-1-white.png" alt="Alessandro Bentivoglio">
+    </a>
+    <div class="nav-links">
+      <a href="#start">Inizia da qui</a>
+      <a href="#strategia">Strategia</a>
+      <a href="#chi-sono">Chi Sono</a>
+      <a href="#testimonianze">Testimonianze</a>
+      <a href="https://alessandrobentivoglio.com/richiediconsulenza" class="nav-cta">Richiedi Consulenza</a>
+      <a href="https://www.alexbentivoglio.com/" class="nav-flag">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/6637845701c73_englishflag.png" alt="English version">
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow">Consulente Marketing Strategico</div>
+    <h1>Lancia e fai <span class="accent">CRESCERE</span><br>il Tuo Business... Online</h1>
+    <p class="hero-sub">Inizia a <strong>Generare Clienti</strong> in Modo <strong>Costante</strong> e <strong>Prevedibile</strong> prendendo il <strong>Controllo</strong> del tuo Business</p>
+    <div class="cta-group">
+      <a href="https://www.alessandrobentivoglio.com/3-regole-de-successo" class="btn btn-primary">Scopri il Metodo<small>Accedi alla Video Lezione Gratuita</small></a>
+      <a href="https://alessandrobentivoglio.com/richiediconsulenza" class="btn btn-secondary">Richiedi Consulenza<small>Crea la Tua Strategia Personalizzata</small></a>
+    </div>
+  </div>
+</section>
+
+<section class="start-here" id="start">
+  <div class="container">
+    <div class="start-here-grid">
+      <div class="start-here-icon">↓</div>
+      <div class="start-here-text">
+        <strong>NON SAI DA DOVE PARTIRE?</strong> Scegli il percorso più adatto a te e inizia subito a costruire il tuo sistema.
+      </div>
+      <a href="#paths" class="btn btn-primary">Inizia da qui</a>
+    </div>
+  </div>
+</section>
+
+<section class="quick-path" id="paths">
+  <div class="container">
+    <div class="quick-path-header">
+      <div class="section-eyebrow">3 PERCORSI</div>
+      <h2>Trova il tuo <span class="accent">punto di partenza</span></h2>
+      <p style="color: var(--gray-light);">Ogni imprenditore ha una situazione diversa. Scegli il percorso che fa per te.</p>
+    </div>
+
+    <div class="paths-grid">
+      <a href="https://www.alessandrobentivoglio.com/3-regole-de-successo" class="path-card">
+        <div class="path-tag">Gratis · 30 min</div>
+        <div class="path-num">01</div>
+        <h3>Video Lezione Gratuita</h3>
+        <p>Le 3 regole del successo che ho insegnato a centinaia di imprenditori per costruire un sistema di marketing basato sui numeri.</p>
+        <span class="path-cta">Guarda la lezione</span>
+      </a>
+
+      <a href="#ebook" class="path-card">
+        <div class="path-tag">PDF · Approfondimento</div>
+        <div class="path-num">02</div>
+        <h3>Ebook Strategico</h3>
+        <p>Il manuale per riprendere il controllo del tuo business, smettere di dipendere dalle agenzie e iniziare a costruire un sistema basato sui numeri.</p>
+        <span class="path-cta">Scarica gratis</span>
+      </a>
+
+      <a href="https://alessandrobentivoglio.com/richiediconsulenza" class="path-card">
+        <div class="path-tag">Per chi è pronto · 1:1</div>
+        <div class="path-num">03</div>
+        <h3>Consulenza Strategica</h3>
+        <p>Una sessione 1:1 in cui costruiamo insieme la tua strategia di business e il tuo sistema di marketing partendo dai tuoi numeri reali.</p>
+        <span class="path-cta">Richiedi consulenza</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="hero-img-section">
+  <div class="container">
+    <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/65ac4e53e8505_Schermata2020-10-26alle16.41.54.png" alt="Sistema di marketing e vendite Alessandro Bentivoglio">
+  </div>
+</div>
+
+<div class="subhead">
+  Crea il tuo <strong>Sistema</strong> di <strong>Marketing e Vendite</strong> Partendo dalla <strong>Pianificazione Strategica</strong> e Trasforma tutto in <strong>Numeri</strong> in 90 giorni.
+</div>
+
+<section id="strategia" class="strategy">
+  <div class="container">
+    <div class="strategy-header">
+      <div class="section-eyebrow">PERCHÈ</div>
+      <h2>La <span class="accent">Strategia</span> è la Prima Cosa<br>da cui partire</h2>
+    </div>
+    <div class="strategy-content">
+      <p>Se vuoi ottenere RISULTATI non hai bisogno di una <em>"web agency"</em>, di un sito, di un funnel, dei social o di campagne sponsorizzate.</p>
+      <p><strong>La prima, ed unica, cosa di cui hai bisogno è una STRATEGIA.</strong></p>
+      <p>Perché? Semplicemente perché non hai idea di come si faccia una strategia, non lo hai mai fatto e nessuno te lo ha mai insegnato. E come te, lo stesso vale per la web agency alla quale ti sei rivolto.</p>
+      <p>Quello di cui hai bisogno è una <em>guida e direzione strategica</em> da parte di un <strong>imprenditore che ha già ottenuto quello che stai cercando</strong>, non da parte di un consulente che fattura 50k l'anno.</p>
+      <p>Se manca la strategia si va a tentativi, alla cieca, e si spreca una marea di budget e di tempo rischiando di non arrivare mai a destinazione.</p>
+      <p>La strategia che sviluppo con gli imprenditori non è una strategia di marketing, è <strong>una strategia di business</strong> e del modello di business che viene prima di ogni altra cosa nel ciclo di un business (eh già... <em>prima ancora del prodotto</em>).</p>
+      <p>Si parte <strong>dalla visione e dalla strategia</strong>, poi vengono persone, processi e prodotti.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/161/635bdd3d669f9_Icon.svg" alt="Risparmia tempo">
+        <h3>Risparmia tempo</h3>
+        <p style="color: var(--gray-light);">Avrai più tempo da dedicare al tuo Business mentre il Marketing lavora per te.</p>
+      </div>
+      <div class="benefit-card">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/161/635bdeb13edef_Icon2.svg" alt="Ottimizza investimenti">
+        <h3>Ottimizza gli Investimenti</h3>
+        <p style="color: var(--gray-light);">Eviterai di sprecare soldi in campagne pubblicitarie poco profittevoli.</p>
+      </div>
+      <div class="benefit-card">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/161/635bdeb80c214_Icon3.svg" alt="Aumenta i profitti">
+        <h3>Aumenta i Profitti</h3>
+        <p style="color: var(--gray-light);">I tuoi profitti crescono grazie a una Strategia Aziendale costruita su misura.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ebook-cta" id="ebook">
+  <div class="container">
+    <div class="ebook-grid">
+      <div class="ebook-cover">
+        <div>
+          <div class="ebook-cover-eyebrow">Manuale Strategico</div>
+        </div>
+        <div>
+          <div class="ebook-cover-title">Il Marketing<br>basato sui<br>Numeri</div>
+        </div>
+        <div class="ebook-cover-author">Alessandro Bentivoglio</div>
+      </div>
+      <div class="ebook-content">
+        <div class="section-eyebrow">RISORSA GRATUITA</div>
+        <h2>Scarica l'Ebook<br><span class="accent">Strategico</span></h2>
+        <p>Il manuale che spiega passo per passo come riprendere il controllo del tuo business, costruire un sistema di marketing che funziona e trasformare la strategia in numeri.</p>
+        <ul>
+          <li>Come capire se la tua strategia attuale funziona davvero</li>
+          <li>I numeri chiave che ogni imprenditore deve monitorare</li>
+          <li>Il framework che ha generato +100 milioni di euro</li>
+          <li>Cosa fare prima di rivolgerti a una nuova agenzia</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="flex-direction: row;">Scarica gratis →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="container">
+    <p class="quote-text">"Non c'è Nessuna Formula Segreta per Diventare Ricchi, il <span class="accent">Successo di un Business</span> è solo <span class="accent">Questione di Prendere Decisioni Logiche Basate sui Numeri</span>."</p>
+    <p class="quote-author">— Alessandro Bentivoglio</p>
+  </div>
+</section>
+
+<section id="chi-sono" class="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/64e4620843c28_AlessandroBentivoglio2023.png" alt="Alessandro Bentivoglio">
+      </div>
+      <div class="about-content">
+        <div class="section-eyebrow">DA FREELANCE AD IMPRENDITORE DI SUCCESSO</div>
+        <h2>Alessandro<br><span class="accent">Bentivoglio</span></h2>
+        <p class="about-text"><em>Fondatore di <strong>Bentivoglio Consulting</strong> · Ex CEO e Co-founder di <strong>Funnel Company</strong> · <strong>+100M€ Generati</strong> in 15 anni</em></p>
+        <p class="about-text"><strong>Chiunque può definirsi "esperto di marketing"</strong> con un paio di corsi online e qualche campagna pubblicitaria andata bene. <strong>Capisco perfettamente la tua diffidenza nell'approccio al marketing.</strong></p>
+        <p class="about-text">Mi definisco uno dei pionieri del Funnel Marketing in Italia, in quanto l'ho importato dagli USA nel 2015. Grazie a queste strategie ho fondato Funnel Company, una delle realtà più innovative nel panorama del marketing digitale in Italia.</p>
+        <p class="about-text">Negli ultimi 15 anni ho lavorato con centinaia di aziende, imprenditori e professionisti. <strong>Ho visto da vicino cosa funziona davvero e cosa no.</strong></p>
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/66219b7236494_4Awards1.png" alt="4 volte vincitore del 2 Comma Club" class="awards-img">
+        <p class="about-text" style="font-style: italic; color: var(--gold); margin-top: 16px;">4 volte vincitore del "2 Comma Club"</p>
+        <div class="badges">
+          <span class="badge">4x 2 Comma Club</span>
+          <span class="badge">+100M€ Generati</span>
+          <span class="badge">15+ Anni di Esperienza</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: 900px; margin: 80px auto 0;">
+      <p style="color: var(--gray-light); font-size: 1.05rem; margin-bottom: 24px;">Sono orgoglioso di essere stato il fondatore di Funnel Company e di aver creato alcuni dei programmi più avanzati e riconosciuti per imprenditori e professionisti:</p>
+
+      <div class="programs-list">
+        <div class="program-item"><strong>Funnel Marketing Certification</strong>, un sistema che ha formato centinaia di professionisti del settore.</div>
+        <div class="program-item"><strong>Funnel PRO, Funnel GO e Funnel Bootcamp</strong>, corsi pratici e strutturati per trasformare la teoria in risultati concreti.</div>
+        <div class="program-item"><strong>Riconoscimenti internazionali come il "2 Comma Club Award"</strong>, un premio assegnato solo a chi ha generato almeno un milione di dollari attraverso un unico funnel.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="clients-section">
+  <div class="container">
+    <p class="clients-label">Alcuni Clienti</p>
+    <div class="clients-grid">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/663feffe7136b_LOGHI3.jpeg" alt="Cliente">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/663ff00b33754_LOGHI4.jpeg" alt="Cliente">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/663ff03328b55_LOGHI6.jpeg" alt="Cliente">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/663ff02a02158_LOGHI5.jpeg" alt="Cliente">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/663ff044eeac6_LOGHI7.jpeg" alt="Cliente">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/663ff04f860f8_LOGHI8.jpeg" alt="Cliente">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/663ff0651d124_LOGHI1.jpeg" alt="Cliente">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/663ff06d4dcff_LOGHI2.jpeg" alt="Cliente">
+    </div>
+  </div>
+</section>
+
+<section class="planning">
+  <div class="container">
+    <div class="planning-content">
+      <h2>Avere le idee chiare<br>è il <span class="accent">primo passo</span></h2>
+
+      <p class="planning-quote">"Se fallisci nella pianificazione, pianifichi il fallimento."<br><small>Benjamin Franklin, 1790</small></p>
+
+      <p>Molte aziende hanno <strong>provato a fare "marketing"</strong> e oggi hanno paura di investire. La verità è che non hanno mai fatto veramente marketing e molto probabilmente non hanno mai avuto una strategia.</p>
+      <p>I motivi per cui il "marketing" ha fallito e non ha portato i risultati desiderati sono:</p>
+
+      <div class="reasons">
+        <div class="reason">
+          <div class="reason-number">01</div>
+          <p class="reason-text">Pensare che <strong>il marketing non sia responsabilità dell'imprenditore</strong>, e quindi la deresponsabilizzazione dalla Strategia di Marketing (o meglio, dalla strategia del proprio Business).</p>
+        </div>
+        <div class="reason">
+          <div class="reason-number">02</div>
+          <p class="reason-text"><strong>Non aver mai avuto una strategia</strong> e quindi essere andati a caso o a "tentativi".</p>
+        </div>
+      </div>
+
+      <p>Per questo motivo aiuto gli imprenditori a capire quali sono le competenze e le responsabilità necessarie per costruire insieme una strategia di Marketing (e di Business) di successo, creando un piano d'azione per ottenere <strong>risultati in modo costante e graduale</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="testimonianze">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="section-eyebrow">TESTIMONIANZE</div>
+      <h2>Alcuni Imprenditori<br>con i quali ho <span class="accent">Collaborato</span></h2>
+      <p>Durante gli ultimi anni ho avuto la fortuna di lavorare con centinaia di imprenditori che hanno applicato la mia metodologia per far chiarezza sulla loro strategia e crescere diventando autonomi.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="testimonial-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/66219c90bf750_MircoGasparotto.png" alt="Mirco Gasparotto"></div>
+        <p class="testimonial-text">"Ho cambiato il mio modo di capire il marketing digitale. Un mindset che non può mancare a qualsiasi imprenditore."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Mirco Gasparotto</div>
+          <div class="testimonial-role">PRESIDENTE Arroweld Italia Spa</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/66219c99ddc4b_CarmineCarlo.png" alt="Carmine Carlo"></div>
+        <p class="testimonial-text">"In 4 mesi ho realizzato 2 Funnel per il lancio del mio primo Best Seller Amazon. Sono passato da 200.000 a 10.000.000€."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Carmine Carlo</div>
+          <div class="testimonial-role">CEO CFC Servizi Legali</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/6621972cd83aa_5.png" alt="Claudia Murra"></div>
+        <p class="testimonial-text">"Sono riuscita a saturare l'agenda per il mio servizio di consulenza di immagine online, in brevissimo tempo."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Claudia Murra</div>
+          <div class="testimonial-role">Image Consultant</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/6621984f7587d_2.png" alt="Francesco Cardone"></div>
+        <p class="testimonial-text">"Il 2020 è stato l'anno del record di fatturato per la mia azienda, grazie al lavoro fatto nel 2021 lo abbiamo superato."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Francesco Cardone</div>
+          <div class="testimonial-role">CEO Imprendifocus Srl</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/6621996f98222_La-creazione-di-un-sistema-online-ci-ha-permesso-di-far-provare-il-nostro-software-a-centinaia-di-nuovi-clienti.-1-.png" alt="Mirko Scaglia"></div>
+        <p class="testimonial-text">"Uno strumento di marketing così potente ci ha permesso di aprire 5 filiali in Italia."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Mirko Scaglia</div>
+          <div class="testimonial-role">Fondatore Protetto Srl</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/66219fa47667d_Gemma-Samantha-2.png" alt="Gemma e Samantha"></div>
+        <p class="testimonial-text">"Grazie ai Funnel abbiamo fatto sold-out al primo evento e raggiunto più di 3.500 donne in tutta Italia."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Gemma e Samantha</div>
+          <div class="testimonial-role">Founder di Business For Lady</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/66219fad0d0d6_Alex-Viola-fml2018.png" alt="Alex Viola"></div>
+        <p class="testimonial-text">"In 9 mesi dall'avvio della mia start up ho raggiunto il 400% di ROI."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Alex Viola</div>
+          <div class="testimonial-role">CEO Alkaenergy</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/662198e24071d_4.png" alt="Silvio Foschi"></div>
+        <p class="testimonial-text">"Con un semplice funnel sono riuscito a generare 35 nuovi clienti per un ticket medio di 9.000 Euro."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Silvio Foschi</div>
+          <div class="testimonial-role">CEO Imio Srl</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-photo"><img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/662198ec77023_6.png" alt="Filippo Rossi"></div>
+        <p class="testimonial-text">"Grazie al sistema di marketing creato riesco a fatturare 6 cifre in modo automatizzato."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Filippo Rossi</div>
+          <div class="testimonial-role">CEO Silent Emotion</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="funnel-system" id="funnel-system">
+  <div class="container">
+    <div class="funnel-system-grid">
+      <div>
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/65481cbd83f92_ModernCourseLaunchPromotionComputerMockupFacebookAd.png" alt="The Funnel System mockup" class="funnel-mockup-img">
+      </div>
+      <div class="funnel-system-content">
+        <h2>Costruisci il Tuo <span class="accent">Funnel</span> per Generare Contatti e Vendite 24/7 <span class="sparkle">✨</span></h2>
+        <p>Con Template Pronti e Prompt AI. Il sistema che ho usato per portare la mia azienda ad oltre 2.000.000 di euro e generare decine di milioni di euro alle aziende dei miei clienti.</p>
+        <a href="https://www.thefunnelsystem.com/" class="btn btn-primary">Accedi a soli 6,99€<small>Inizia a Creare il Tuo Sistema</small></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="consultation" id="consulenza-finale">
+  <div class="container">
+    <div class="consultation-content">
+      <div class="section-eyebrow">PER CHI È PRONTO</div>
+      <h2>Richiedi una <span class="accent">Consulenza Strategica</span></h2>
+      <p>Una sessione 1:1 in cui partiamo dai tuoi numeri reali per costruire la strategia di business e il sistema di marketing che ti serve.</p>
+
+      <div class="consult-features">
+        <div class="consult-feature">
+          <strong>1:1</strong>
+          Sessione personalizzata con Alex Bentivoglio
+        </div>
+        <div class="consult-feature">
+          <strong>60 min</strong>
+          Analisi della tua situazione attuale
+        </div>
+        <div class="consult-feature">
+          <strong>Piano d'azione</strong>
+          Strategia concreta da applicare subito
+        </div>
+      </div>
+
+      <a href="https://alessandrobentivoglio.com/richiediconsulenza" class="btn btn-primary" style="flex-direction: row;">Prenota la tua consulenza →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="https://d1yei2z3i6k35z.cloudfront.net/4637141/656b988702bab_AB-logo-1-white.png" alt="Alessandro Bentivoglio">
+        </div>
+        <p class="footer-bio">Imprenditore, Investitore e Mentore Strategico per la Crescita Aziendale.</p>
+      </div>
+      <div class="footer-col">
+        <h4>MENÙ</h4>
+        <a href="#start">Inizia da qui</a>
+        <a href="#strategia">Strategia</a>
+        <a href="#chi-sono">Chi sono</a>
+        <a href="https://alessandrobentivoglio.com/richiediconsulenza">Richiedi Consulenza</a>
+      </div>
+      <div class="footer-col">
+        <h4>RISORSE</h4>
+        <a href="https://www.alessandrobentivoglio.com/3-regole-de-successo">Video lezione gratuita</a>
+        <a href="#ebook">Ebook strategico</a>
+        <a href="https://www.youtube.com/@Alessandro_Bentivoglio">YouTube</a>
+        <a href="https://www.thefunnelsystem.com/">The Funnel System</a>
+      </div>
+      <div class="footer-col">
+        <h4>SOCIAL</h4>
+        <a href="https://youtube.com/@Alessandro_Bentivoglio">Youtube</a>
+        <a href="https://facebook.com/AlessandroBentivoglio8">Facebook</a>
+        <a href="https://instagram.com/alessandro_bentivoglio">Instagram</a>
+        <a href="https://linkedin.com/in/alessandrobentivoglio">Linkedin</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Copyright © Alessandro Bentivoglio, tutti i diritti riservati.<br>
+      <a href="https://www.alessandrobentivoglio.com/privacy/">Privacy</a> · <a href="https://www.alessandrobentivoglio.com/termini">Termini e Condizioni</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
