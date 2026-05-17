@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospect Zero v2, Alessandro Bentivoglio, 2 varianti</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:#0c0c0c;color:#fff;min-height:100vh;display:flex;align-items:center;padding:40px 20px}
+.wrap{max-width:1100px;margin:0 auto;width:100%}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.1;margin-bottom:16px;letter-spacing:-1.5px;text-align:center}
+h1 span{color:#f0b41a;font-style:italic}
+.sub{text-align:center;color:#aaa;font-size:1.05rem;max-width:700px;margin:0 auto 16px}
+.note{text-align:center;color:#888;font-size:.9rem;max-width:700px;margin:0 auto 56px;font-style:italic}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px}
+.card{padding:40px 32px;background:#161616;border:1px solid #2a2a2a;border-radius:16px;text-decoration:none;color:inherit;transition:all .3s;display:block;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#f0b41a;transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.card:hover{border-color:#f0b41a;transform:translateY(-4px)}
+.card:hover::before{transform:scaleX(1)}
+.tag{display:inline-block;padding:4px 10px;background:rgba(240,180,26,.15);color:#f0b41a;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:4px;margin-bottom:20px}
+.card h2{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;margin-bottom:12px;line-height:1.1}
+.card h2 span{color:#f0b41a}
+.card p{color:#aaa;font-size:.95rem;line-height:1.6;margin-bottom:24px}
+.card ul{list-style:none;margin-bottom:28px}
+.card li{padding:6px 0;color:#ddd;font-size:.92rem;display:flex;align-items:start;gap:10px}
+.card li::before{content:'✓';color:#f0b41a;font-weight:900}
+.btn{display:inline-block;background:#f0b41a;color:#0c0c0c;padding:14px 24px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none}
+.foot{margin-top:64px;padding-top:32px;border-top:1px solid #2a2a2a;text-align:center;color:#666;font-size:13px}
+.foot a{color:#888;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Prospect Zero, <span>2 varianti</span> v2.0</h1>
+  <p class="sub">Ricostruzione di alessandrobentivoglio.com secondo il metodo Bentivoglio (skill funnel-migration-tool).</p>
+  <p class="note">Versione corretta che usa logo originale, foto reale, testimonianze con foto vere, loghi clienti reali e tutti gli asset del sito di partenza.</p>
+
+  <div class="grid">
+    <a href="variante-a.html" class="card">
+      <span class="tag">Variante A · Percorso B1</span>
+      <h2>Stesso copy<br><span>design moderno</span></h2>
+      <p>Restyling grafico fedele al copy e alla struttura originale. Stesso messaggio, stesse testimonianze, stesse CTA. Cambia solo il vestito visivo: design 2026 con tipografia gerarchica, animazioni e layout moderno. Tutte le immagini originali sono incluse (logo, foto Alex, awards, loghi clienti, foto testimonianze).</p>
+      <ul>
+        <li>Stesso target del sito attuale</li>
+        <li>Copy invariato parola per parola</li>
+        <li>Immagini originali del prospect</li>
+        <li>2 CTA principali come oggi</li>
+        <li>Focus: impatto visivo immediato</li>
+      </ul>
+      <span class="btn">Apri variante A →</span>
+    </a>
+
+    <a href="variante-b.html" class="card">
+      <span class="tag">Variante B · Percorso B2</span>
+      <h2>Copy refinement<br><span>struttura aggiornata</span></h2>
+      <p>Copy molto vicino all'originale con piccoli aggiustamenti di leggibilità. Struttura aggiornata con sezione "Inizia da qui" e 3 percorsi (video, ebook, consulenza), nuovo lead magnet ebook, sezione consulenza dedicata in fondo. Tutte le immagini originali del prospect sono mantenute.</p>
+      <ul>
+        <li>Percorso guidato "Inizia da qui"</li>
+        <li>3 path strategici (video, ebook, consulenza)</li>
+        <li>Nuova sezione ebook scaricabile</li>
+        <li>Sezione consulenza dedicata</li>
+        <li>Focus: conversione e segmentazione</li>
+      </ul>
+      <span class="btn">Apri variante B →</span>
+    </a>
+  </div>
+
+  <div class="foot">
+    Prospect Zero, simulazione interna del workflow outbound, modalità assistita.<br>
+    Costruito con il metodo Bentivoglio (skill funnel-migration-tool + page-builder).<br>
+    <a href="../">Torna al repository</a>
+  </div>
+</div>
+</body>
+</html>
